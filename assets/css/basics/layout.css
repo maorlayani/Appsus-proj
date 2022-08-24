@@ -1,0 +1,5 @@
+/* Note main layout */
+.note-main-layout>*:not(.full) {
+    max-width: 1000px;
+    margin: auto;
+}
