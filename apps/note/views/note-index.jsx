@@ -19,16 +19,27 @@ export class NoteIndex extends React.Component {
             .then((notes) => this.setState({ notes }))
     }
 
+    onAddNoteTxt = (txt) => {
+        // console.log('from index', txt)
+        noteService.addNoteTxt(txt)
+            .then((note) => {
+                this.setState(({ notes }) => ({ notes: [note, ...notes] }))
+            })
+
+    }
+
     render() {
         const { notes } = this.state
+        const { onAddNoteTxt } = this
         if (!notes) return <h2>Loading...</h2>
         return (
-            <div className="note-index">
-                <h1>note app</h1>
+            <div className="note-index flex column align-center">
+                {/* <h1>note app</h1> */}
+                <NoteCompose onAddNoteTxt={onAddNoteTxt} />
                 <NoteList notes={notes} />
                 {/* <NoteFilter />
                 <NoteFolderList />
-                <NoteCompose /> */}
+                */}
             </div>
         )
     }
