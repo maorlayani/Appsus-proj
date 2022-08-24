@@ -8,7 +8,9 @@ import { mailService } from '../services/mail.service.js'
 export class MailIndex extends React.Component {
   state = {
     mails: [],
-    filterBy: null,
+    filterBy: {
+      subject: '',
+    },
   }
 
   componentDidMount() {
@@ -16,8 +18,9 @@ export class MailIndex extends React.Component {
   }
 
   loadMails = () => {
-    console.log('hello from loadMails')
-    mailService.query().then((mails) => this.setState({ mails }))
+    mailService
+      .query(this.state.filterBy)
+      .then((mails) => this.setState({ mails }))
   }
 
   onSetFilter = (filterBy) => {
@@ -26,6 +29,7 @@ export class MailIndex extends React.Component {
 
   render() {
     const { mails } = this.state
+    console.log('mails:', mails)
     const { onSetFilter } = this
     return (
       <section className="mail-app">
