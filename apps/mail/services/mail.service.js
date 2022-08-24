@@ -102,7 +102,7 @@ function _createEmail(
     subject,
     body,
     isRead: false,
-    sentAt: Date.now(),
+    sentAt: utilService.getFormtedTime(),
     to: 'momo@momo.com',
     sentBy,
     isCheck: false,

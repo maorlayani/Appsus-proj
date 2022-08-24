@@ -1,0 +1,14 @@
+.mail-filter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mail-filter input {
+  min-width: 300px;
+  min-height: 35px;
+  background-color: rgb(239, 244, 244);
+  border: none;
+  border-radius: 0.6em;
+  padding-left: 20px;
+}
