@@ -1,0 +1,11 @@
+.note-preview {
+    background-color: whi;
+    border-radius: .5em;
+    padding-bottom: 30px;
+    box-shadow: 0 0 2px 0 black;
+    min-height: 125px;
+    max-height: 370px;
+    /* max-width: 240px; */
+    margin-bottom: 10px;
+    break-inside: avoid-column;
+}

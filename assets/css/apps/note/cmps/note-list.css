@@ -1,3 +1,6 @@
-span {
-    background-color: white;
+.note-list-container {
+    column-count: 4;
+    column-gap: 10px;
+    margin-top: 20px;
+    column-width: 240px;
 }
