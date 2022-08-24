@@ -8,29 +8,27 @@ export const mailService = {
   remove,
   getNextEmailId,
   save,
+  getSubjects,
 }
 
 const KEY = 'emailDB'
-// var gVendors = ['audi', 'fiat', 'suzuki', 'honda', 'mazda']
-
+var gSubjects = ['All', 'Financial', 'Shoping', 'Study', 'Sport', 'Vacation']
+var gSentBy = ['Wolt', 'Dropbox', 'AliExpress', 'Tel-Aviv', 'Nir-Aviv', 'Lime']
 //TODO : function query(filterBy)
-function query() {
+function query(filterBy) {
   let emails = _loadFromStorage()
-  if (!emails) {
+  if (!emails || emails.length === 0) {
     emails = _createEmails()
     _saveToStorage(emails)
   }
 
-  // if (filterBy) {
-  //     let { vendor, minSpeed, maxSpeed } = filterBy
-  //     if (!minSpeed) minSpeed = 0;
-  //     if (!maxSpeed) maxSpeed = Infinity
-  //     emails = emails.filter(car => (
-  //         car.vendor.includes(vendor) &&
-  //         car.speed >= minSpeed &&
-  //         car.speed <= maxSpeed
-  //     ))
-  // }
+  if (filterBy) {
+    let { subject } = filterBy
+    if (!subject) subject = 'All'
+    else {
+      emails = emails.filter((email) => email.subject.includes(subject))
+    }
+  }
 
   return Promise.resolve(emails)
 }
@@ -79,27 +77,42 @@ function _update(emailToUpdate) {
   return Promise.resolve(emailToUpdate)
 }
 
-// function getVendors() {
-//     return gVendors
-// }
+function getSubjects() {
+  return gSubjects
+}
+
+function _getRandLabelMail(item) {
+  const randNum = utilService.getRandomIntInclusive(0, gSubjects.length - 1)
+  if (item === 'subject') {
+    return gSubjects[randNum]
+  } else if (item === 'sentBy') {
+    return gSentBy[randNum]
+  } else {
+    return gSubjects[randNum]
+  }
+}
 
 function _createEmail(
-  subject = utilService.makeLorem(5),
-  body = utilService.makeLorem(40)
+  subject = _getRandLabelMail('subject'),
+  body = utilService.makeLorem(40),
+  sentBy = _getRandLabelMail('sentBy')
 ) {
   return {
     id: utilService.makeId(),
     subject,
     body,
     isRead: false,
-    sentAt: Date.now(),
+    sentAt: utilService.getFormtedTime(),
     to: 'momo@momo.com',
+    sentBy,
+    isCheck: false,
+    isSign: false,
   }
 }
 
 function _createEmails() {
   const emails = []
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < 10; i++) {
     emails.push(_createEmail())
   }
   return emails

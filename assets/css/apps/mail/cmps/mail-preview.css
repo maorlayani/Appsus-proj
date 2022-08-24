@@ -1,3 +1,39 @@
-span {
-    background-color: white;
+.mail-preview {
+  display: flex;
+  outline: 1px solid rgb(227, 225, 225);
+}
+
+.mail-preview button {
+  background: none;
+  border: none;
+  margin: 10px;
+}
+
+.mail-preview button:hover {
+  cursor: pointer;
+}
+
+.mail-preview h4 {
+  margin: 10px;
+  width: 150px;
+}
+
+.mail-preview .mail-body {
+  white-space: nowrap;
+  width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 10px;
+}
+
+.mail-preview ul {
+  display: flex;
+}
+
+.mail-preview ul li {
+  margin: 10px;
+}
+
+.mail-preview ul li:hover {
+  cursor: pointer;
 }
