@@ -1,5 +1,7 @@
 .mail-list {
   width: 80%;
+  height: 100%;
+  position: relative;
 }
 
 .mail-list ul li.mail-preview {
@@ -8,8 +10,25 @@
 
 .mail-list ul li {
   outline: 1px solid rgb(227, 225, 225);
+  height: 40px;
 }
 
 .mail-list ul li.mail-preview.unRead {
   background-color: whitesmoke;
+}
+
+.mail-list ul li .btn-edit-mail {
+  /* background-color: aqua; */
+  position: absolute;
+  width: 200px;
+  right: 10px;
+  display: flex;
+  text-align: right;
+  /* justify-content: space-between; */
+  display: none;
+}
+
+.mail-list ul li .btn-edit-mail:hover {
+  /* background-color: bisque; */
+  display: block;
 }

@@ -5,9 +5,9 @@
 }
 
 .mail-filter input {
-  min-width: 300px;
+  min-width: 450px;
   min-height: 35px;
-  background-color: rgb(239, 244, 244);
+  background-color: rgb(212, 224, 228);
   border: none;
   border-radius: 0.6em;
   padding-left: 20px;

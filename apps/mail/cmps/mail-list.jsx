@@ -31,15 +31,18 @@ export function MailList({ mails, onSelectMail, onToggleBtn, onRemoveMail }) {
             <Link to={'/mail/' + mail.id}>
               <MailPreview mail={mail} onSelectMail={onSelectMail} />
             </Link>
-            <Link
-              to={`/mail/trash/${mail.id}`}
-              onClick={() => {
-                onRemoveMail(event, mail.id)
-              }}
-            >
-              🗑
-            </Link>
-            <Link to={`/mail/compose/${mail.id}`}>✉️</Link>
+
+            <div className="btn-edit-mail">
+              <Link
+                to={`/mail/trash/${mail.id}`}
+                onClick={() => {
+                  onRemoveMail(event, mail.id)
+                }}
+              >
+                🗑
+              </Link>
+              <Link to={`/mail/compose/${mail.id}`}>✉️</Link>
+            </div>
           </li>
         ))}
       </ul>

@@ -21,6 +21,7 @@ export class MailIndex extends React.Component {
       trash: false,
     },
     selectedMail: null,
+    isCompose: false,
   }
 
   componentDidMount() {
@@ -71,15 +72,21 @@ export class MailIndex extends React.Component {
     })
   }
 
+  onCompose = (isCompose) => {
+    console.log('hiiii comp0se:')
+    console.log('isCompose:', isCompose)
+  }
+
   render() {
-    const { mails, selectedMail } = this.state
-    console.log('mails:', mails)
+    const { mails, selectedMail, isCompose } = this.state
+    console.log('mails:', isCompose)
     const {
       onSetFilterBySearch,
       onSetFilterBySelect,
       onSelectMail,
       onToggleBtn,
       onRemoveMail,
+      onCompose,
     } = this
     return (
       <section className="mail-app">
@@ -90,7 +97,8 @@ export class MailIndex extends React.Component {
         <MailTopNavbar />
 
         <section className="main-content-app">
-          <MailFolderList />
+          <MailFolderList onCompose={onCompose} />
+
           {!selectedMail && (
             <MailList
               mails={mails}

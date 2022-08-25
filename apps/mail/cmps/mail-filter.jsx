@@ -75,14 +75,6 @@ export class MailFilter extends React.Component {
             <option value="isCheck">Check</option>
           </select>
         </form>
-
-        <button
-          onClick={() => {
-            this.props.history.push('/note')
-          }}
-        >
-          Compose
-        </button>
       </section>
     )
   }

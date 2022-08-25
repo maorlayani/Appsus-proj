@@ -1,4 +1,4 @@
-export function MailFolderList() {
+export function MailFolderList(onCompose) {
   function getClassCliced(ev) {
     console.log('target:', ev)
   }
@@ -6,12 +6,7 @@ export function MailFolderList() {
   return (
     <section className="mail-folder-list">
       <ul>
-        <li
-          className="mail-folder compose"
-          onClick={() => {
-            getClassCliced()
-          }}
-        >
+        <li className="mail-folder compose" onClick={() => onCompose}>
           <span>🖊</span>Compose<span></span>
           <span></span>
         </li>
