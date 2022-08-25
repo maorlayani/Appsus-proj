@@ -33,7 +33,7 @@ export function MailList({ mails, onSelectMail, onToggleBtn, onRemoveMail }) {
                 onRemoveMail(event, mail.id)
               }}
             >
-              🗑
+              🗑gyhy
             </Link>
             <Link to={`/mail/compose/${mail.id}`}>✉️</Link>
           </li>
