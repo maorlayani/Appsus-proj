@@ -29,6 +29,7 @@ export class NoteIndex extends React.Component {
     }
 
     onUpdetaNote = (val, note) => {
+        if (!val) return
         // console.log(val, note)
         let { notes } = this.state
         noteService.updateNote(val, note)
@@ -47,6 +48,8 @@ export class NoteIndex extends React.Component {
                 this.setState({ notes })
             })
     }
+
+
 
     onDeleteNote = (noteId) => {
         // console.log('delete me!', noteId)

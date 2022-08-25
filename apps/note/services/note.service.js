@@ -104,7 +104,10 @@ function _demoData() {
                 todos: [
                     { txt: "Driving liscence", doneAt: null },
                     { txt: "Coding power", doneAt: null },
-                    { txt: "Grocery", doneAt: null }
+                    { txt: "Grocery", doneAt: null },
+                    { txt: "Car test", doneAt: null },
+                    { txt: "Pay bills", doneAt: null },
+                    { txt: "Draw cash", doneAt: null }
                 ]
             }
         }

@@ -17,6 +17,7 @@ export class NotePreview extends React.Component {
     }
 
     setOnDetailsDisplay = (isOn) => {
+        console.log(isOn)
         this.setState(({ isOnDetailsDisplay: isOn }))
     }
 

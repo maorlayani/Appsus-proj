@@ -9,3 +9,38 @@
 .is-done {
     text-decoration: line-through;
 }
+
+/* .note-todos button {
+    float: right;
+} */
+
+.btn-delete-todo {
+    float: right;
+    border: none;
+    background-color: transparent;
+    background-size: 18px 18px;
+    margin: 0;
+    opacity: 0.54;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    background-position: center;
+    height: 26px;
+    width: 26px;
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSIjMDAwIj4KICA8cGF0aCBkPSJNMTkgNi40MUwxNy41OSA1IDEyIDEwLjU5IDYuNDEgNSA1IDYuNDEgMTAuNTkgMTIgNSAxNy41OSA2LjQxIDE5IDEyIDEzLjQxIDE3LjU5IDE5IDE5IDE3LjU5IDEzLjQxIDEyIDE5IDYuNDF6Ii8+Cjwvc3ZnPgo=");
+    padding: 0;
+}
+
+.btn-delete-todo:hover {
+    cursor: pointer;
+    opacity: 0.87;
+    background-color: rgba(95, 99, 104, 0.157);
+}
+
+.note-todo-container {
+    padding: 10px;
+}
+
+.note-todo-container:hover {
+    /* outline-width: 1px solid black; */
+    outline: 1px solid black;
+}
