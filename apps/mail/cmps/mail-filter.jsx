@@ -1,3 +1,5 @@
+const { Route, Link } = ReactRouterDOM
+
 export class MailFilter extends React.Component {
   state = {
     filterBy: {
@@ -46,7 +48,7 @@ export class MailFilter extends React.Component {
 
   render() {
     const { subject } = this.state.filterBy
-    console.log('subject:', subject)
+
     return (
       <section className="mail-filter">
         <form onSubmit={this.onFilter}>
@@ -73,6 +75,14 @@ export class MailFilter extends React.Component {
             <option value="isCheck">Check</option>
           </select>
         </form>
+
+        <button
+          onClick={() => {
+            this.props.history.push('/note')
+          }}
+        >
+          Compose
+        </button>
       </section>
     )
   }

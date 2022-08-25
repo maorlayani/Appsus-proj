@@ -4,7 +4,7 @@ export function AppHeader() {
   return (
     <header className="app-header">
       <Link to="/">
-        <h3>LOGO!</h3>
+        <h3>APPSUS</h3>
       </Link>
       <nav>
         <NavLink exact to="/">
@@ -12,6 +12,7 @@ export function AppHeader() {
         </NavLink>
         <NavLink to="/about">About</NavLink>
         <NavLink to="/note">Note</NavLink>
+        <NavLink to="/mail">Mail</NavLink>
       </nav>
     </header>
   )

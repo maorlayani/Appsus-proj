@@ -1,0 +1,30 @@
+.mail-details {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+}
+
+.mail-details .header-mail-details {
+  display: flex;
+  justify-content: flex-start;
+  justify-content: space-between;
+  margin: 10px;
+  padding: 10px;
+}
+
+.mail-details .header-mail-details h1,
+h2 {
+  margin: 20px;
+}
+
+.mail-details .header-mail-details button {
+  margin: 20px;
+}
+
+.mail-details p {
+  background-color: whitesmoke;
+  width: 50%;
+}

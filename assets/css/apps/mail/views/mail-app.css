@@ -1,0 +1,11 @@
+.mail-app {
+  background-color: whitesmoke;
+  height: 100vh;
+}
+
+.mail-app .main-content-app {
+  width: 1000px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
