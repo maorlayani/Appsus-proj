@@ -1,3 +1,5 @@
+const { Route, Link } = ReactRouterDOM
+
 import { MailFilter } from '../cmps/mail-filter.jsx'
 import { MailFolderList } from '../cmps/mail-folder-list.jsx'
 import { MailList } from '../cmps/mail-list.jsx'
@@ -12,8 +14,14 @@ export class MailIndex extends React.Component {
     filterBy: {
       subject: '',
       selected: '',
+      starred: false,
+      inbox: false,
+      important: false,
+      sent: false,
+      trash: false,
     },
     selectedMail: null,
+    isCompose: false,
   }
 
   componentDidMount() {
@@ -38,16 +46,20 @@ export class MailIndex extends React.Component {
 
   onSelectMail = (mailId) => {
     console.log('mailId:', mailId)
-    mailService
-      .getById(mailId)
-      .then((mail) => this.setState({ selectedMail: mail }))
+    mailService.getById(mailId).then((mail) => {
+      if (mail) {
+        mail.isRead = true
+        mailService.save(mail).then((mail) => this.loadMails())
+      }
+      this.setState({ selectedMail: mail })
+    })
   }
 
   onToggleBtn = (mail, field) => {
     console.log('mailId:', mail)
     console.log('mail[field]:', !mail[field])
     mail[field] = !mail[field]
-    mailService.save(mail).then(() => this.loadMails)
+    mailService.save(mail).then((mail) => this.loadMails())
   }
 
   onRemoveMail = (ev, mailId) => {
@@ -60,41 +72,50 @@ export class MailIndex extends React.Component {
     })
   }
 
+  onCompose = (isCompose) => {
+    console.log('hiiii comp0se:')
+    console.log('isCompose:', isCompose)
+  }
+
   render() {
-    const { mails, selectedMail } = this.state
-    console.log('mails:', mails)
+    const { mails, selectedMail, isCompose } = this.state
+    console.log('mails:', isCompose)
     const {
       onSetFilterBySearch,
       onSetFilterBySelect,
       onSelectMail,
       onToggleBtn,
       onRemoveMail,
+      onCompose,
     } = this
     return (
       <section className="mail-app">
-        {!selectedMail && (
-          <React.Fragment>
-            <MailFilter
-              onSetFilterBySearch={onSetFilterBySearch}
-              onSetFilterBySelect={onSetFilterBySelect}
-            />
-            <MailFolderList />
+        <MailFilter
+          onSetFilterBySearch={onSetFilterBySearch}
+          onSetFilterBySelect={onSetFilterBySelect}
+        />
+        <MailTopNavbar />
+
+        <section className="main-content-app">
+          <MailFolderList onCompose={onCompose} />
+
+          {!selectedMail && (
             <MailList
               mails={mails}
               onSelectMail={onSelectMail}
               onToggleBtn={onToggleBtn}
               onRemoveMail={onRemoveMail}
             />
-            <MailTopNavbar />
-          </React.Fragment>
-        )}
-        {selectedMail && (
-          <MailDetails
-            mail={selectedMail}
-            onGoBack={() => onSelectMail()}
-            onRemoveMail={onRemoveMail}
-          />
-        )}
+          )}
+
+          {selectedMail && (
+            <MailDetails
+              mail={selectedMail}
+              onGoBack={() => onSelectMail()}
+              onRemoveMail={onRemoveMail}
+            />
+          )}
+        </section>
       </section>
     )
   }
