@@ -29,7 +29,7 @@ export class NoteCompose extends React.Component {
     onSubmitNote = (ev) => {
         ev.preventDefault()
         const { noteTxt, noteType } = this.state
-        console.log('on submit', noteTxt)
+        // console.log('on submit', noteTxt)
         this.props.onAddNote(noteTxt, noteType)
         this.setState(({
             noteType: null,
@@ -83,18 +83,6 @@ export class NoteCompose extends React.Component {
 
         return <section className="note-compose">
 
-            {/* {isOnFocus && <input type="text" name="noteTitle" id="noteTitle" placeholder="Title" />} */}
-            {/* <div className="note-compose-container flex align-center space-between" onClick={isInputOnFocus} > */}
-            {/* <div className="note-compose-container flex align-center" onClick={isInputOnFocus} >
-                {!isOnFocus && <span>Take a note..</span>}
-                {isOnFocus && <form onSubmit={onSubmitNote}>
-                    <input type="text" name="noteTxt" id="noteTxt" ref={noteTxtInputRef} placeholder={txtInputPlaceholder} onChange={changeHandler} />
-                </form>}
-                {!isOnFocus && <div className="btn-compose-container">
-                    <button className="btn-note-compose btn-add-todo"></button>
-                    <button className="btn-note-compose btn-add-img" onClick={onAddNoteImg}></button>
-                </div>}
-            </div> */}
             <div className="note-compose-container flex align-center space-between" >
                 <form onSubmit={onSubmitNote}>
                     <input type="text" name="noteTxt" id="noteTxt" value={noteTxt} ref={noteTxtInputRef} placeholder={inputPlaceholder} onChange={changeHandler} onClick={onInputFocus} />

@@ -3,7 +3,9 @@ import { storageService } from '../../../services/storage.service.js'
 export const noteService = {
     query,
     addNote,
-    deleteNote
+    deleteNote,
+    updateNote,
+    updateNoteTodo
 }
 
 const STORAGE_KEY = 'notesDB'
@@ -62,6 +64,14 @@ function _demoData() {
         },
         {
             id: utilService.makeId(),
+            type: "note-video",
+            info: {
+                url: "https://www.youtube.com/embed/8aGhZQkoFbQ",
+                title: "EVENT LOOP "
+            }
+        },
+        {
+            id: utilService.makeId(),
             type: "note-txt",
             info: {
                 txt: utilService.makeLorem(70)
@@ -85,18 +95,19 @@ function _demoData() {
                 backgroundColor:
                     "#00d"
             }
+        },
+        {
+            id: utilService.makeId(),
+            type: "note-todo",
+            info: {
+                label: "Get my stuff together",
+                todos: [
+                    { txt: "Driving liscence", doneAt: null },
+                    { txt: "Coding power", doneAt: null },
+                    { txt: "Grocery", doneAt: null }
+                ]
+            }
         }
-        // {
-        //     id: "n103",
-        //     type: "note-todos",
-        //     info: {
-        //         label: "Get my stuff together",
-        //         todos: [
-        //             { txt: "Driving liscence", doneAt: null },
-        //             { txt: "Coding power", doneAt: 187111111 }
-        //         ]
-        //     }
-        // }
     ]
     return notes
 }
@@ -113,7 +124,10 @@ function query() {
 function addNote(txt, noteType) {
     let newNote
     if (noteType === 'txt') newNote = createNoteTxt(txt)
-    else if (noteType === 'img' || 'video') newNote = createNotewithtUrl(txt, noteType)
+    else if (noteType === 'img') newNote = createNoteImg(txt, noteType)
+    else if (noteType === 'video') newNote = createNoteVideo(txt, noteType)
+    else if (noteType === 'todo') newNote = createNoteTodo(txt, noteType)
+    console.log('noteTODO', newNote)
     let notes = storageService.loadFromStorage(STORAGE_KEY)
     notes.unshift(newNote)
     storageService.saveToStorage(STORAGE_KEY, notes)
@@ -130,20 +144,105 @@ function createNoteTxt(txt) {
     }
 }
 
-function createNotewithtUrl(txt, noteType) {
+function createNoteImg(txt, noteType) {
     return {
         id: utilService.makeId(),
         type: 'note-' + noteType,
         info: {
             url: txt,
+            title: ''
         }
     }
 }
 
+function createNoteVideo(txt, noteType) {
+    let url = txt
+    url = url.replace('watch?v=', 'embed/')
+    url = url.substring(0, 41)
+    return {
+        id: utilService.makeId(),
+        type: 'note-' + noteType,
+        info: {
+            url: url,
+        }
+    }
+}
+
+function createNoteTodo(txt, noteType) {
+
+    let todos = txt.split(',')
+    console.log('before splice', todos)
+    const label = todos.splice(0, 1)
+    console.log('after splice', todos)
+    return {
+        id: utilService.makeId(),
+        type: 'note-' + noteType,
+        info: {
+            label: label[0],
+            todos:
+                todos.map(todo => { return { txt: todo, doneAt: null } })
+        }
+    }
+}
+
+
+//     id: "n103",
+//     type: "note-todos",
+//     info: {
+//         label: "Get my stuff together",
+//         todos: [
+//             { txt: "Driving liscence", doneAt: null },
+//             { txt: "Coding power", doneAt: 187111111 }
+//         ]
+//     }
+// }
+// ]
+
 function deleteNote(noteId) {
-    // console.log('delte me from server', noteId)
     let notes = storageService.loadFromStorage(STORAGE_KEY)
     notes = notes.filter(note => note.id !== noteId)
     storageService.saveToStorage(STORAGE_KEY, notes)
     return Promise.resolve()
+}
+
+function updateNote(val, note) {
+    let updatedNote
+    if (note.type === 'note-txt') updatedNote = updateNoteTxt(val, note)
+    else if (note.type === 'note-img') updatedNote = updateNoteImg(val, note)
+    else if (note.type === 'note-video') updatedNote = updateNoteVideo(val, note)
+
+    return Promise.resolve(updatedNote)
+}
+
+function updateNoteTxt(val, noteToUpdate) {
+    noteToUpdate.info.txt = val
+    let notes = storageService.loadFromStorage(STORAGE_KEY)
+    notes = notes.map(note => note.id === noteToUpdate.id ? noteToUpdate : note)
+    storageService.saveToStorage(STORAGE_KEY, notes)
+    return noteToUpdate
+}
+
+function updateNoteImg(val, noteToUpdate) {
+    // console.log(val, noteToUpdate)
+    noteToUpdate.info.title = val
+    let notes = storageService.loadFromStorage(STORAGE_KEY)
+    notes = notes.map(note => note.id === noteToUpdate.id ? noteToUpdate : note)
+    storageService.saveToStorage(STORAGE_KEY, notes)
+    return noteToUpdate
+}
+
+function updateNoteVideo(val, noteToUpdate) {
+    // console.log(val, noteToUpdate)
+    noteToUpdate.info.title = val
+    let notes = storageService.loadFromStorage(STORAGE_KEY)
+    notes = notes.map(note => note.id === noteToUpdate.id ? noteToUpdate : note)
+    storageService.saveToStorage(STORAGE_KEY, notes)
+    return noteToUpdate
+}
+
+function updateNoteTodo(noteToUpdate) {
+    let notes = storageService.loadFromStorage(STORAGE_KEY)
+    notes = notes.map(note => note.id === noteToUpdate.id ? noteToUpdate : note)
+    storageService.saveToStorage(STORAGE_KEY, notes)
+    return Promise.resolve(noteToUpdate)
 }

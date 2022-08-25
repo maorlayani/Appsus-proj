@@ -36,3 +36,6 @@
 @import './apps/note/cmps/note-img.css';
 @import './apps/note/cmps/note-compose.css';
 @import './apps/note/cmps/note-tool-bar.css';
+@import './apps/note/cmps/note-todos.css';
+@import './apps/note/cmps/note-details.css';
+@import './apps/note/cmps/note-video.css';

@@ -28,6 +28,26 @@ export class NoteIndex extends React.Component {
             })
     }
 
+    onUpdetaNote = (val, note) => {
+        // console.log(val, note)
+        let { notes } = this.state
+        noteService.updateNote(val, note)
+            .then((updatedNote) => {
+                notes = notes.map(note => notes.id === updatedNote.id ? updatedNote : note)
+                this.setState({ notes })
+            })
+    }
+
+    onUpdateTodoNote = (note) => {
+        // console.log('UPDATED TODO from index', note)
+        let { notes } = this.state
+        noteService.updateNoteTodo(note)
+            .then((updatedNote) => {
+                notes = notes.map(note => notes.id === updatedNote.id ? updatedNote : note)
+                this.setState({ notes })
+            })
+    }
+
     onDeleteNote = (noteId) => {
         // console.log('delete me!', noteId)
         let { notes } = this.state
@@ -40,12 +60,12 @@ export class NoteIndex extends React.Component {
 
     render() {
         const { notes } = this.state
-        const { onAddNote, onDeleteNote } = this
+        const { onAddNote, onDeleteNote, onUpdetaNote, onUpdateTodoNote } = this
         if (!notes) return <h2>Loading...</h2>
         return (
             <div className="note-index flex column align-center">
                 <NoteCompose onAddNote={onAddNote} />
-                <NoteList notes={notes} onDeleteNote={onDeleteNote} />
+                <NoteList notes={notes} onDeleteNote={onDeleteNote} onUpdetaNote={onUpdetaNote} onUpdateTodoNote={onUpdateTodoNote} />
                 {/* <NoteFilter />
                 <NoteFolderList />
                 */}

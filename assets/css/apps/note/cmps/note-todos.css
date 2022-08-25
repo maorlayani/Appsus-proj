@@ -1,0 +1,11 @@
+.note-todos {
+    padding: 10px;
+}
+
+.note-todos h4 {
+    text-transform: capitalize;
+}
+
+.is-done {
+    text-decoration: line-through;
+}
