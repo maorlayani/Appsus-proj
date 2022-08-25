@@ -1,8 +1,11 @@
-import { utilService } from "../../../services/util.service.js"
-
+import { utilService } from '../../../services/util.service.js'
+import { storageService } from '../../../services/storage.service.js'
 export const noteService = {
-    query
+    query,
+    addNoteTxt
 }
+
+const STORAGE_KEY = 'notesDB'
 
 function _demoData() {
     const notes = [
@@ -37,7 +40,7 @@ function _demoData() {
             }
         },
         {
-            id: "n102",
+            id: utilService.makeId(),
             type: "note-img",
             info: {
                 url: "https://picsum.photos/300/200",
@@ -71,7 +74,7 @@ function _demoData() {
             }
         },
         {
-            id: "n102",
+            id: utilService.makeId(),
             type: "note-img",
             info: {
                 url: "https://picsum.photos/300/300",
@@ -98,6 +101,28 @@ function _demoData() {
 }
 
 function query() {
-    const note = _demoData()
-    return Promise.resolve(note)
+    let notes = storageService.loadFromStorage(STORAGE_KEY)
+    if (!notes) {
+        notes = _demoData()
+        storageService.saveToStorage(STORAGE_KEY, notes)
+    }
+    return Promise.resolve(notes)
+}
+
+function addNoteTxt(txt) {
+    const noteTxt = createNoteTxt(txt)
+    let notes = storageService.loadFromStorage(STORAGE_KEY)
+    notes.unshift(noteTxt)
+    storageService.saveToStorage(STORAGE_KEY, notes)
+    return Promise.resolve(noteTxt)
+}
+
+function createNoteTxt(txt) {
+    return {
+        id: utilService.makeId(),
+        type: "note-txt",
+        info: {
+            txt
+        }
+    }
 }

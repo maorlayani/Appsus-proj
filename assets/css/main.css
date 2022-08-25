@@ -9,6 +9,9 @@
 @import './basics/helpers.css';
 @import './basics/layout.css';
 
+/* MQ */
+@import './mq/mq.css';
+
 /* Views */
 @import './views/home.css';
 
@@ -31,3 +34,4 @@
 @import './apps/note/cmps/note-preview.css';
 @import './apps/note/cmps/note-txt.css';
 @import './apps/note/cmps/note-img.css';
+@import './apps/note/cmps/note-compose.css';

@@ -1,0 +1,36 @@
+@media (max-width:600px) {
+
+    .note-main-layout>*:not(.full) {
+        max-width: 250px;
+        margin: auto;
+    }
+}
+
+/* SMALL */
+@media (min-width: 600px) {
+
+    .note-main-layout>*:not(.full) {
+        max-width: 500px;
+        margin: auto;
+    }
+}
+
+/* MEDIUM */
+
+@media (min-width:820px) {
+
+    .note-main-layout>*:not(.full) {
+        max-width: 750px;
+        margin: auto;
+    }
+}
+
+/* LARGE */
+
+@media (min-width:1150px) {
+
+    .note-main-layout>*:not(.full) {
+        max-width: 1000px;
+        margin: auto;
+    }
+}

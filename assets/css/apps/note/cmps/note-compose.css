@@ -1,0 +1,95 @@
+.note-compose {
+    width: 600px;
+    height: 36px;
+    margin-top: 50px;
+}
+
+.note-compose:hover {
+    cursor: text;
+}
+
+.note-compose-container {
+    box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
+    font-size: 15px;
+    line-height: 1.25rem;
+    letter-spacing: .01428571em;
+    padding: 0px 16px 0px 16px;
+    border-radius: 8px;
+    color: #202124;
+    /* font-family: "Roboto",arial,sans-serif; */
+    /* transition-duration: 0.218s; */
+    /* opacity: 1;
+    transition-property: opacity; */
+}
+
+[name="noteTxt"] {
+    border: none;
+    width: 550px;
+    height: 50px;
+    /* height: 100%; */
+}
+
+[name="noteTxt"]:focus {
+    outline: none;
+
+}
+
+[name="noteTitle"] {
+    width: 600px;
+    height: 50px;
+    border: none;
+    box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
+    box-shadow: none;
+    font-size: 15px;
+    line-height: 1.25rem;
+    letter-spacing: .01428571em;
+    padding: 0px 16px 0px 16px;
+    border-radius: 8px;
+
+}
+
+
+
+.note-compose-container span {
+    padding: 0;
+    margin: 0;
+    width: 400px;
+}
+
+.btn-note-compose {
+    border: none;
+    background-color: transparent;
+    background-size: 24px 24px;
+    margin: 0;
+    opacity: 0.54;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    background-position: center;
+    height: 46px;
+    width: 46px;
+    position: relative;
+    left: 80px;
+}
+
+
+.btn-add-img {
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSIjMDAwIj4KICA8cGF0aCBkPSJNMTkgM0g1Yy0xLjEgMC0yIC45LTIgMnYxNGMwIDEuMS45IDIgMiAyaDE0YzEuMSAwIDItLjkgMi0yVjVjMC0xLjEtLjktMi0yLTJ6bTAgMTZINVY1aDE0djE0em0tNS03bC0zIDMuNzJMOSAxM2wtMyA0aDEybC00LTV6Ii8+Cjwvc3ZnPgo=");
+}
+
+
+.btn-add-img:hover {
+    cursor: pointer;
+    opacity: 0.87;
+    background-color: rgba(95, 99, 104, 0.157);
+}
+
+
+.btn-add-todo {
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSIjMDAwIj48cGF0aCBkPSJNMTkgM0g1Yy0xLjEgMC0yIC45LTIgMnYxNGMwIDEuMS45IDIgMiAyaDE0YzEuMSAwIDItLjkgMi0yVjVjMC0xLjEtLjktMi0yLTJ6bTAgMTZINVY1aDE0djE0eiIvPgogIDxwYXRoIGQ9Ik0xOCA5bC0xLjQtMS40LTYuNiA2LjYtMi42LTIuNkw2IDEzbDQgNHoiLz4KPC9zdmc+Cg==");
+}
+
+.btn-add-todo:hover {
+    cursor: pointer;
+    opacity: 0.87;
+    background-color: rgba(95, 99, 104, 0.157);
+}
