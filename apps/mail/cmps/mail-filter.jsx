@@ -2,6 +2,7 @@ export class MailFilter extends React.Component {
   state = {
     filterBy: {
       subject: '',
+      selected: 'All',
     },
   }
 
@@ -16,14 +17,31 @@ export class MailFilter extends React.Component {
         },
       }),
       () => {
-        this.props.onSetFilter(this.state.filterBy)
+        this.props.onSetFilterBySearch(this.state.filterBy)
+      }
+    )
+  }
+
+  handelSelectedChange = ({ target }) => {
+    const field = target.name
+    const value = target.value
+    this.setState(
+      (prevState) => ({
+        filterBy: {
+          ...prevState.filterBy,
+          [field]: value,
+        },
+      }),
+      () => {
+        this.props.onSetFilterBySelect(this.state.filterBy)
       }
     )
   }
 
   onFilter = (ev) => {
     ev.preventDefault()
-    this.props.onSetFilter(this.state.filterBy)
+    this.props.onSetFilterBySearch(this.state.filterBy)
+    this.props.onSetFilterBySelect(this.state.filterBy)
   }
 
   render() {
@@ -41,6 +59,19 @@ export class MailFilter extends React.Component {
             value={subject}
             onChange={this.handelInputChange}
           />
+
+          <label htmlFor="filter-select"></label>
+          <select
+            className="filter-select"
+            name="selected"
+            id="filter-select"
+            onChange={this.handelSelectedChange}
+          >
+            <option value="All">All</option>
+            <option value="isRead">Unread</option>
+            <option value="isImportant">Star</option>
+            <option value="isCheck">Check</option>
+          </select>
         </form>
       </section>
     )

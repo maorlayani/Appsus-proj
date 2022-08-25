@@ -1,3 +1,7 @@
-span {
-    background-color: white;
+.mail-list {
+  background-color: white;
+}
+
+.mail-list ul li {
+  outline: 1px solid rgb(227, 225, 225);
 }

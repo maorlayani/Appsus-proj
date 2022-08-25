@@ -14,7 +14,7 @@ export const mailService = {
 const KEY = 'emailDB'
 var gSubjects = ['All', 'Financial', 'Shoping', 'Study', 'Sport', 'Vacation']
 var gSentBy = ['Wolt', 'Dropbox', 'AliExpress', 'Tel-Aviv', 'Nir-Aviv', 'Lime']
-//TODO : function query(filterBy)
+
 function query(filterBy) {
   let emails = _loadFromStorage()
   if (!emails || emails.length === 0) {
@@ -22,13 +22,23 @@ function query(filterBy) {
     _saveToStorage(emails)
   }
 
+  console.log('emails:', emails)
   if (filterBy) {
-    let { subject } = filterBy
+    let { subject, selected } = filterBy
+    console.log('{ subject, selected }:', { subject, selected })
     if (!subject) subject = 'All'
-    else {
-      emails = emails.filter((email) => email.subject.includes(subject))
-    }
+    if (!selected) selected = 'All'
+    console.log('{ subject, selected }:', { subject, selected })
+
+    emails = emails.filter((email) => {
+      // console.log('email:', email)
+      // console.log(`${subject}`)
+      // console.log('email.subject:', email.subject)
+
+      return email.subject.includes(subject) || email.sentBy.includes(subject)
+    })
   }
+  console.log('emails:', emails)
 
   return Promise.resolve(emails)
 }
@@ -84,7 +94,7 @@ function getSubjects() {
 function _getRandLabelMail(item) {
   const randNum = utilService.getRandomIntInclusive(0, gSubjects.length - 1)
   if (item === 'subject') {
-    return gSubjects[randNum]
+    return `All ${gSubjects[randNum]}`
   } else if (item === 'sentBy') {
     return gSentBy[randNum]
   } else {
@@ -106,7 +116,7 @@ function _createEmail(
     to: 'momo@momo.com',
     sentBy,
     isCheck: false,
-    isSign: false,
+    isImportant: false,
   }
 }
 
