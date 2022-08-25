@@ -2,7 +2,8 @@ import { utilService } from '../../../services/util.service.js'
 import { storageService } from '../../../services/storage.service.js'
 export const noteService = {
     query,
-    addNoteTxt
+    addNote,
+    deleteNote
 }
 
 const STORAGE_KEY = 'notesDB'
@@ -109,12 +110,14 @@ function query() {
     return Promise.resolve(notes)
 }
 
-function addNoteTxt(txt) {
-    const noteTxt = createNoteTxt(txt)
+function addNote(txt, noteType) {
+    let newNote
+    if (noteType === 'txt') newNote = createNoteTxt(txt)
+    else if (noteType === 'img' || 'video') newNote = createNotewithtUrl(txt, noteType)
     let notes = storageService.loadFromStorage(STORAGE_KEY)
-    notes.unshift(noteTxt)
+    notes.unshift(newNote)
     storageService.saveToStorage(STORAGE_KEY, notes)
-    return Promise.resolve(noteTxt)
+    return Promise.resolve(newNote)
 }
 
 function createNoteTxt(txt) {
@@ -125,4 +128,22 @@ function createNoteTxt(txt) {
             txt
         }
     }
+}
+
+function createNotewithtUrl(txt, noteType) {
+    return {
+        id: utilService.makeId(),
+        type: 'note-' + noteType,
+        info: {
+            url: txt,
+        }
+    }
+}
+
+function deleteNote(noteId) {
+    // console.log('delte me from server', noteId)
+    let notes = storageService.loadFromStorage(STORAGE_KEY)
+    notes = notes.filter(note => note.id !== noteId)
+    storageService.saveToStorage(STORAGE_KEY, notes)
+    return Promise.resolve()
 }

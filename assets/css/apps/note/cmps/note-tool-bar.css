@@ -1,0 +1,32 @@
+.note-tool-bar {
+    width: 250px;
+    background-color: rgba(255, 255, 255, 0.692);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.btn-note-toolbar {
+    border: none;
+    background-color: transparent;
+    background-size: 24px 24px;
+    margin: 0;
+    opacity: 0.54;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    background-position: center;
+    height: 46px;
+    width: 46px;
+}
+
+
+.btn-delete {
+    background-image: url("https://img.icons8.com/material-outlined/24/000000/trash--v1.png");
+}
+
+
+.btn-delete:hover {
+    cursor: pointer;
+    opacity: 0.87;
+    background-color: rgba(95, 99, 104, 0.157);
+}

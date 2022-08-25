@@ -24,8 +24,8 @@
 
 [name="noteTxt"] {
     border: none;
-    width: 550px;
-    height: 50px;
+    width: 350px;
+    /* height: 50px; */
     /* height: 100%; */
 }
 
@@ -48,14 +48,6 @@
 
 }
 
-
-
-.note-compose-container span {
-    padding: 0;
-    margin: 0;
-    width: 400px;
-}
-
 .btn-note-compose {
     border: none;
     background-color: transparent;
@@ -67,8 +59,8 @@
     background-position: center;
     height: 46px;
     width: 46px;
-    position: relative;
-    left: 80px;
+    /* position: relative;
+    left: 80px; */
 }
 
 
@@ -93,3 +85,31 @@
     opacity: 0.87;
     background-color: rgba(95, 99, 104, 0.157);
 }
+
+.btn-add-txt {
+    background-image: url("https://img.icons8.com/material-outlined/24/000000/text.png");
+}
+
+.btn-add-txt:hover {
+    cursor: pointer;
+    opacity: 0.87;
+    background-color: rgba(95, 99, 104, 0.157);
+}
+
+
+.btn-add-video {
+    background-image: url("https://img.icons8.com/material-outlined/24/000000/video.png");
+}
+
+.btn-add-video:hover {
+    cursor: pointer;
+    opacity: 0.87;
+    background-color: rgba(95, 99, 104, 0.157);
+}
+
+.active {
+    opacity: 0.87;
+}
+
+/* trash */
+/* https://img.icons8.com/material-outlined/24/000000/trash--v1.png */
