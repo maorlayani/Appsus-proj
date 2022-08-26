@@ -22,7 +22,7 @@ export class NotePreview extends React.Component {
     }
 
     render() {
-        const { note, onDeleteNote, onUpdetaNote, onUpdateTodoNote, onCopyNote } = this.props
+        const { note, onDeleteNote, onUpdetaNote, onUpdateTodoNote, onCopyNote, onSortNotesByPinned } = this.props
         const { isMouseHover, isOnDetailsDisplay } = this.state
         const { handleMouseOver, handleMouseOut, setOnDetailsDisplay } = this
         return <section >
@@ -38,6 +38,7 @@ export class NotePreview extends React.Component {
                     note={note}
                     onUpdateTodoNote={onUpdateTodoNote}
                     onCopyNote={onCopyNote}
+                    onSortNotesByPinned={onSortNotesByPinned}
                 />}
             </div>
             {isOnDetailsDisplay && <NoteDetails
@@ -48,6 +49,7 @@ export class NotePreview extends React.Component {
                 onUpdetaNote={onUpdetaNote}
                 onUpdateTodoNote={onUpdateTodoNote}
                 onCopyNote={onCopyNote}
+                onSortNotesByPinned={onSortNotesByPinned}
 
             />}
         </section >

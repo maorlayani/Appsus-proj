@@ -7,7 +7,9 @@ import { noteService } from '../services/note.service.js'
 
 export class NoteIndex extends React.Component {
     state = {
-        notes: null
+        notes: null,
+        pinnedNotes: [],
+        unPinnedNotes: []
     }
 
     componentDidMount() {
@@ -16,12 +18,15 @@ export class NoteIndex extends React.Component {
 
     loadNotes = () => {
         noteService.query()
-            .then((notes) => this.setState({ notes }))
+            .then((notes) => {
+                let { pinnedNotes, unPinnedNotes } = this.state
+                pinnedNotes = notes.filter(note => (note.isPinned))
+                unPinnedNotes = notes.filter(note => (!note.isPinned))
+                this.setState({ notes, pinnedNotes, unPinnedNotes })
+            })
     }
 
     onAddNote = (txt, noteType) => {
-        console.log('in index txt', txt)
-        console.log('in index noteType', noteType)
         noteService.addNote(txt, noteType)
             .then((note) => {
                 this.setState(({ notes }) => ({ notes: [note, ...notes] }))
@@ -30,7 +35,6 @@ export class NoteIndex extends React.Component {
 
     onUpdetaNote = (val, note) => {
         if (!val) return
-        // console.log(val, note)
         let { notes } = this.state
         noteService.updateNote(val, note)
             .then((updatedNote) => {
@@ -40,7 +44,6 @@ export class NoteIndex extends React.Component {
     }
 
     onUpdateTodoNote = (note) => {
-        // console.log('UPDATED TODO from index', note)
         let { notes } = this.state
         noteService.updateNoteTodo(note)
             .then((updatedNote) => {
@@ -49,9 +52,7 @@ export class NoteIndex extends React.Component {
             })
     }
 
-
     onDeleteNote = (noteId) => {
-        // console.log('delete me!', noteId)
         let { notes } = this.state
         noteService.deleteNote(noteId)
             .then(() => {
@@ -70,9 +71,16 @@ export class NoteIndex extends React.Component {
             })
     }
 
+    onSortNotesByPinned = (note) => {
+        noteService.updateNoteTodo(note)
+            .then(() => {
+                this.loadNotes()
+            })
+    }
+
     render() {
-        const { notes } = this.state
-        const { onAddNote, onDeleteNote, onUpdetaNote, onUpdateTodoNote, onCopyNote } = this
+        const { notes, pinnedNotes, unPinnedNotes } = this.state
+        const { onAddNote, onDeleteNote, onUpdetaNote, onUpdateTodoNote, onCopyNote, onSortNotesByPinned } = this
         if (!notes) return <h2>Loading...</h2>
         return (
             <div className="note-index flex column align-center">
@@ -81,7 +89,10 @@ export class NoteIndex extends React.Component {
                     onDeleteNote={onDeleteNote}
                     onUpdetaNote={onUpdetaNote}
                     onUpdateTodoNote={onUpdateTodoNote}
-                    onCopyNote={onCopyNote} />
+                    onCopyNote={onCopyNote}
+                    onSortNotesByPinned={onSortNotesByPinned}
+                    pinnedNotes={pinnedNotes}
+                    unPinnedNotes={unPinnedNotes} />
                 {/* <NoteFilter />
                 <NoteFolderList />
                 */}

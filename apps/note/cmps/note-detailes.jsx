@@ -17,7 +17,7 @@ export class NoteDetails extends React.Component {
 
     render() {
         // console.log('FROM DETAILS-COM isOnDetailsDisplay', isOnDetailsDisplay)
-        const { note, onDeleteNote, setOnDetailsDisplay, isOnDetailsDisplay, onUpdetaNote, onUpdateTodoNote, onCopyNote } = this.props
+        const { note, onDeleteNote, setOnDetailsDisplay, isOnDetailsDisplay, onUpdetaNote, onUpdateTodoNote, onCopyNote, onSortNotesByPinned } = this.props
         const { noteTxtUpdatedVal, updatedTodoNote } = this.state
         const { updateNoteTxtVal, updadteTxtTodoNote } = this
         // console.log('from details', updatedTodoNote)
@@ -39,7 +39,8 @@ export class NoteDetails extends React.Component {
                                 onDeleteNote={onDeleteNote}
                                 note={note}
                                 onUpdateTodoNote={onUpdateTodoNote}
-                                onCopyNote={onCopyNote} />
+                                onCopyNote={onCopyNote}
+                                onSortNotesByPinned={onSortNotesByPinned} />
                         </div>
                     </div>
                 </div>

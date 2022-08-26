@@ -16,18 +16,19 @@ function _demoData() {
         {
             id: utilService.makeId(),
             type: "note-txt",
-            // isPinned: true,
+            isPinned: true,
             info: {
                 txt: utilService.makeLorem(35)
             },
             style: {
                 backgroundColor:
-                    "#aecbfa"
+                    "#e6c9a8"
             }
         },
         {
             id: utilService.makeId(),
             type: "note-txt",
+            isPinned: true,
             info: {
                 txt: utilService.makeLorem(50)
             },
@@ -39,7 +40,7 @@ function _demoData() {
         {
             id: utilService.makeId(),
             type: "note-txt",
-            // isPinned: true,
+            isPinned: false,
             info: {
                 txt: utilService.makeLorem(20)
             },
@@ -51,17 +52,19 @@ function _demoData() {
         {
             id: utilService.makeId(),
             type: "note-txt",
+            isPinned: false,
             info: {
                 txt: utilService.makeLorem(15)
             },
             style: {
                 backgroundColor:
-                    "#aecbfa"
+                    "#a7ffeb"
             }
         },
         {
             id: utilService.makeId(),
             type: "note-img",
+            isPinned: false,
             info: {
                 url: "https://picsum.photos/300/200",
                 title: "Bobi and Me"
@@ -74,7 +77,7 @@ function _demoData() {
         {
             id: utilService.makeId(),
             type: "note-txt",
-            // isPinned: true,
+            isPinned: true,
             info: {
                 txt: "Fullstack Me Baby!"
             },
@@ -86,6 +89,7 @@ function _demoData() {
         {
             id: utilService.makeId(),
             type: "note-video",
+            isPinned: false,
             info: {
                 url: "https://www.youtube.com/embed/8aGhZQkoFbQ",
                 title: "EVENT LOOP "
@@ -98,6 +102,7 @@ function _demoData() {
         {
             id: utilService.makeId(),
             type: "note-txt",
+            isPinned: false,
             info: {
                 txt: utilService.makeLorem(70)
             },
@@ -109,6 +114,7 @@ function _demoData() {
         {
             id: utilService.makeId(),
             type: "note-txt",
+            isPinned: false,
             info: {
                 txt: utilService.makeLorem(10)
             },
@@ -120,6 +126,7 @@ function _demoData() {
         {
             id: utilService.makeId(),
             type: "note-img",
+            isPinned: false,
             info: {
                 url: "https://picsum.photos/300/300",
                 title: "Bobi and Me"
@@ -132,6 +139,7 @@ function _demoData() {
         {
             id: utilService.makeId(),
             type: "note-todo",
+            isPinned: false,
             info: {
                 label: "Get my stuff together",
                 todos: [
@@ -145,7 +153,7 @@ function _demoData() {
             },
             style: {
                 backgroundColor:
-                    "tomato"
+                    "#fff"
             }
         }
     ]
@@ -158,6 +166,7 @@ function query() {
         notes = _demoData()
         storageService.saveToStorage(STORAGE_KEY, notes)
     }
+    notes.sort(note => note.isPinned ? -1 : 1)
     return Promise.resolve(notes)
 }
 
