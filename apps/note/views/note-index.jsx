@@ -50,7 +50,6 @@ export class NoteIndex extends React.Component {
     }
 
 
-
     onDeleteNote = (noteId) => {
         // console.log('delete me!', noteId)
         let { notes } = this.state
@@ -61,14 +60,28 @@ export class NoteIndex extends React.Component {
             })
     }
 
+    onCopyNote = (ev, copiedNote) => {
+        ev.stopPropagation()
+        let { notes } = this.state
+        noteService.copyNote(copiedNote)
+            .then((note) => {
+                notes.unshift(note)
+                this.setState({ notes })
+            })
+    }
+
     render() {
         const { notes } = this.state
-        const { onAddNote, onDeleteNote, onUpdetaNote, onUpdateTodoNote } = this
+        const { onAddNote, onDeleteNote, onUpdetaNote, onUpdateTodoNote, onCopyNote } = this
         if (!notes) return <h2>Loading...</h2>
         return (
             <div className="note-index flex column align-center">
                 <NoteCompose onAddNote={onAddNote} />
-                <NoteList notes={notes} onDeleteNote={onDeleteNote} onUpdetaNote={onUpdetaNote} onUpdateTodoNote={onUpdateTodoNote} />
+                <NoteList notes={notes}
+                    onDeleteNote={onDeleteNote}
+                    onUpdetaNote={onUpdetaNote}
+                    onUpdateTodoNote={onUpdateTodoNote}
+                    onCopyNote={onCopyNote} />
                 {/* <NoteFilter />
                 <NoteFolderList />
                 */}

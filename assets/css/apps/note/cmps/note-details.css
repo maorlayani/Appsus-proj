@@ -23,15 +23,44 @@
     transition: .5s;
     overflow: auto;
     padding-bottom: 50px;
+    /* overflow: visible; */
 }
 
 
 
 .focus img {
     max-width: 630px;
+    max-height: 440px;
 }
 
 /* width */
+
+
+.note-details .note-preview-container {
+    border-top-right-radius: 8px;
+}
+
+.toolbar-container {
+    background-color: blue;
+}
+
+.note-details .toolbar-container {
+    position: relative;
+    opacity: 1;
+    top: 0;
+    left: 0;
+
+    z-index: 100;
+}
+
+.container-test {
+    position: relative;
+    top: 50px;
+    overflow: visible;
+}
+
+
+
 .focus::-webkit-scrollbar {
     width: 10px;
     border-radius: 8px;
@@ -53,14 +82,4 @@
 /* Handle on hover */
 .focus::-webkit-scrollbar-thumb:hover {
     background: #555;
-}
-
-.note-details .note-preview-container {
-    border-top-right-radius: 8px;
-}
-
-.note-details .toolbar-container {
-    position: relative;
-    bottom: -70px;
-    opacity: 1;
 }

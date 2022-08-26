@@ -25,7 +25,14 @@ export class NoteImg extends React.Component {
         return <div className="note-img">
             <img src={note.info.url} />
             {!isOnDetailsDisplay && <h4>{note.info.title}</h4>}
-            {isOnDetailsDisplay && <input type="text" name="note-img-title" placeholder="Title" value={textInputValue} onChange={notImgChangeHandler}></input>}
+            {isOnDetailsDisplay && <input
+                type="text"
+                name="note-img-title"
+                placeholder="Title"
+                value={textInputValue}
+                onChange={notImgChangeHandler}
+                style={{ backgroundColor: note.style.backgroundColor }}
+            ></input>}
         </div>
     }
 

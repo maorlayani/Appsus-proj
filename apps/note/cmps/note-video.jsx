@@ -27,7 +27,14 @@ export class NoteVideo extends React.Component {
             <iframe src={note.info.url} frameBorder="0" ></iframe>
             {/* <h4>{info.title}</h4> */}
             {!isOnDetailsDisplay && <h4>{note.info.title}</h4>}
-            {isOnDetailsDisplay && <input type="text" name="note-video-title" placeholder="Title" value={textInputValue} onChange={notImgChangeHandler}></input>}
+            {isOnDetailsDisplay && <input
+                type="text"
+                name="note-video-title"
+                placeholder="Title"
+                value={textInputValue}
+                onChange={notImgChangeHandler}
+                style={{ backgroundColor: note.style.backgroundColor }}
+            ></input>}
         </div>
     }
 

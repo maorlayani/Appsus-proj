@@ -22,7 +22,13 @@ export class NoteTxt extends React.Component {
 
         return <div className="note-txt">
             {!isOnDetailsDisplay && <p>{note.info.txt}</p>}
-            {isOnDetailsDisplay && <textarea type="textarea" name="note-txt" id="" value={textAreaValue} onChange={notTxtChangeHandler} />}
+            {isOnDetailsDisplay && <textarea
+                type="textarea"
+                name="note-txt"
+                id=""
+                value={textAreaValue}
+                onChange={notTxtChangeHandler}
+                style={{ backgroundColor: note.style.backgroundColor }} />}
         </div>
     }
 

@@ -1,5 +1,6 @@
 .note-video iframe {
     pointer-events: none;
+    width: 240px;
 }
 
 .details-display iframe {

@@ -1,6 +1,6 @@
 import { NotePreview } from "./note-preview.jsx";
 
-export function NoteList({ notes, onDeleteNote, onUpdetaNote, onUpdateTodoNote }) {
+export function NoteList({ notes, onDeleteNote, onUpdetaNote, onUpdateTodoNote, onCopyNote }) {
 
     return <section className="note-list note-main-layout">
         <div className="note-list-container">
@@ -9,7 +9,9 @@ export function NoteList({ notes, onDeleteNote, onUpdetaNote, onUpdateTodoNote }
                 key={note.id}
                 onDeleteNote={onDeleteNote}
                 onUpdetaNote={onUpdetaNote}
-                onUpdateTodoNote={onUpdateTodoNote} />)}
+                onUpdateTodoNote={onUpdateTodoNote}
+                onCopyNote={onCopyNote}
+            />)}
         </div>
     </section>
 }

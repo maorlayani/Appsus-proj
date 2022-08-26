@@ -1,32 +1,102 @@
 .note-tool-bar {
-    width: 250px;
-    background-color: rgba(255, 255, 255, 0.692);
+    width: 243px;
+    /* background-color: rgb(255, 255, 255); */
+    /* background-color: rgba(255, 255, 255, 0.692); */
     position: absolute;
     bottom: 0;
     left: 0;
+    border-radius: 8px;
+    background-color: transparent;
 }
+
+
 
 .btn-note-toolbar {
     border: none;
     background-color: transparent;
-    background-size: 24px 24px;
+    background-size: 18px 18px;
     margin: 0;
     opacity: 0.54;
     background-repeat: no-repeat;
     border-radius: 50%;
     background-position: center;
-    height: 46px;
-    width: 46px;
+    height: 32px;
+    width: 32px;
+    position: absolute;
+    top: 15px;
 }
 
+.btn-note-toolbar.btn-color-picker {
+    left: 40px
+}
+
+.btn-note-toolbar.btn-copy {
+    left: 80px
+}
 
 .btn-delete {
     background-image: url("https://img.icons8.com/material-outlined/24/000000/trash--v1.png");
 }
 
-
 .btn-delete:hover {
     cursor: pointer;
     opacity: 0.87;
     background-color: rgba(95, 99, 104, 0.157);
+}
+
+.btn-color-picker {
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSIjMDAwIj4KICA8cGF0aCBkPSJNMTIgMjJDNi40OSAyMiAyIDE3LjUxIDIgMTJTNi40OSAyIDEyIDJzMTAgNC4wNCAxMCA5YzAgMy4zMS0yLjY5IDYtNiA2aC0xLjc3Yy0uMjggMC0uNS4yMi0uNS41IDAgLjEyLjA1LjIzLjEzLjMzLjQxLjQ3LjY0IDEuMDYuNjQgMS42N0EyLjUgMi41IDAgMCAxIDEyIDIyem0wLTE4Yy00LjQxIDAtOCAzLjU5LTggOHMzLjU5IDggOCA4Yy4yOCAwIC41LS4yMi41LS41YS41NC41NCAwIDAgMC0uMTQtLjM1Yy0uNDEtLjQ2LS42My0xLjA1LS42My0xLjY1YTIuNSAyLjUgMCAwIDEgMi41LTIuNUgxNmMyLjIxIDAgNC0xLjc5IDQtNCAwLTMuODYtMy41OS03LTgtN3oiLz48Y2lyY2xlIGN4PSI2LjUiIGN5PSIxMS41IiByPSIxLjUiLz4KICA8Y2lyY2xlIGN4PSI5LjUiIGN5PSI3LjUiIHI9IjEuNSIvPjxjaXJjbGUgY3g9IjE0LjUiIGN5PSI3LjUiIHI9IjEuNSIvPjxjaXJjbGUgY3g9IjE3LjUiIGN5PSIxMS41IiByPSIxLjUiLz4KPC9zdmc+Cg==");
+}
+
+.btn-color-picker:hover {
+    cursor: pointer;
+    opacity: 0.87;
+    background-color: rgba(95, 99, 104, 0.157);
+}
+
+.btn-copy {
+    background-image: url('https://img.icons8.com/material-rounded/24/000000/copy.png');
+}
+
+.btn-copy:hover {
+    cursor: pointer;
+    opacity: 0.87;
+    background-color: rgba(95, 99, 104, 0.157);
+}
+
+.toolbar-color-container {
+    width: 400px;
+    height: 50px;
+    box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
+    border-radius: 8px;
+    position: relative;
+    top: -15px;
+    left: 20px;
+    transform: translate(-50%, -50%);
+    z-index: 200;
+    overflow: visible;
+    background-color: white;
+    justify-content: space-between;
+    align-items: center;
+    opacity: 0;
+    padding: 5px 5px;
+}
+
+.toolbar-color-container.show {
+    opacity: 1;
+    left: 200px;
+}
+
+.toolbar-color.show {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+}
+
+.toolbar-color.show:hover {
+    cursor: pointer;
+}
+
+.toolbar-color-container>:first-child {
+    border: 1px solid rgba(95, 99, 104, 0.357);
 }

@@ -13,6 +13,9 @@
 /* .note-todos button {
     float: right;
 } */
+.todo-label {
+    padding-left: 5px;
+}
 
 .btn-delete-todo {
     float: right;
@@ -20,7 +23,8 @@
     background-color: transparent;
     background-size: 18px 18px;
     margin: 0;
-    opacity: 0.54;
+    /* opacity: 0.54; */
+    opacity: 0;
     background-repeat: no-repeat;
     border-radius: 50%;
     background-position: center;
@@ -28,19 +32,78 @@
     width: 26px;
     background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSIjMDAwIj4KICA8cGF0aCBkPSJNMTkgNi40MUwxNy41OSA1IDEyIDEwLjU5IDYuNDEgNSA1IDYuNDEgMTAuNTkgMTIgNSAxNy41OSA2LjQxIDE5IDEyIDEzLjQxIDE3LjU5IDE5IDE5IDE3LjU5IDEzLjQxIDEyIDE5IDYuNDF6Ii8+Cjwvc3ZnPgo=");
     padding: 0;
+    position: relative;
+    bottom: -10px;
 }
 
 .btn-delete-todo:hover {
     cursor: pointer;
     opacity: 0.87;
     background-color: rgba(95, 99, 104, 0.157);
+    position: relative;
+    bottom: -10px;
 }
 
 .note-todo-container {
-    padding: 10px;
+    /* padding: 10px; */
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
 }
 
-.note-todo-container:hover {
-    /* outline-width: 1px solid black; */
-    outline: 1px solid black;
+/* .note-todo-container.display-Details:hover {
+
+    border-bottom: 1px solid rgba(95, 99, 104, 0.157);
+    border-top: 1px solid rgba(95, 99, 104, 0.157);
+} */
+
+/* .note-todo-container:focus>.todo-txt {
+
+    border-bottom: 1px solid rgba(95, 99, 104, 0.157);
+    border-top: 1px solid rgba(95, 99, 104, 0.157);
+} */
+
+.note-todo-container [name="todo-checkbox"] {
+    display: inline;
+}
+
+.todo-txt {
+    width: 100%;
+    /* padding: 12px 16px; */
+    border: none;
+    display: inline;
+    /* text-decoration: line-through; */
+    border-bottom: 1px solid rgba(95, 99, 104, 0);
+    border-top: 1px solid rgba(95, 99, 104, 0);
+    padding: 13px;
+}
+
+/* .todo-txt::after {
+    content: '';
+    width: 150%;
+} */
+
+.todo-txt:hover+.btn-delete-todo {
+    opacity: 0.54;
+}
+
+.todo-txt:focus+.btn-delete-todo {
+    opacity: 0.54;
+}
+
+.todo-txt.checked {
+    width: 100%;
+    /* padding: 12px 16px; */
+    border: none;
+    display: inline;
+    text-decoration: line-through;
+}
+
+.todo-txt:focus {
+    outline: none;
+    border-bottom: 1px solid rgba(95, 99, 104, 0.157);
+    border-top: 1px solid rgba(95, 99, 104, 0.157);
+}
+
+.todo-txt.checked:focus {
+    outline: none;
 }

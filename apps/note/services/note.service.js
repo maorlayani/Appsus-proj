@@ -5,7 +5,8 @@ export const noteService = {
     addNote,
     deleteNote,
     updateNote,
-    updateNoteTodo
+    updateNoteTodo,
+    copyNote
 }
 
 const STORAGE_KEY = 'notesDB'
@@ -18,6 +19,10 @@ function _demoData() {
             // isPinned: true,
             info: {
                 txt: utilService.makeLorem(35)
+            },
+            style: {
+                backgroundColor:
+                    "#aecbfa"
             }
         },
         {
@@ -25,6 +30,10 @@ function _demoData() {
             type: "note-txt",
             info: {
                 txt: utilService.makeLorem(50)
+            },
+            style: {
+                backgroundColor:
+                    "#fff"
             }
         },
         {
@@ -33,6 +42,10 @@ function _demoData() {
             // isPinned: true,
             info: {
                 txt: utilService.makeLorem(20)
+            },
+            style: {
+                backgroundColor:
+                    "#fff"
             }
         },
         {
@@ -40,6 +53,10 @@ function _demoData() {
             type: "note-txt",
             info: {
                 txt: utilService.makeLorem(15)
+            },
+            style: {
+                backgroundColor:
+                    "#aecbfa"
             }
         },
         {
@@ -51,7 +68,7 @@ function _demoData() {
             },
             style: {
                 backgroundColor:
-                    "#00d"
+                    "#fff"
             }
         },
         {
@@ -60,6 +77,10 @@ function _demoData() {
             // isPinned: true,
             info: {
                 txt: "Fullstack Me Baby!"
+            },
+            style: {
+                backgroundColor:
+                    "#fff"
             }
         },
         {
@@ -68,6 +89,10 @@ function _demoData() {
             info: {
                 url: "https://www.youtube.com/embed/8aGhZQkoFbQ",
                 title: "EVENT LOOP "
+            },
+            style: {
+                backgroundColor:
+                    "#aecbfa"
             }
         },
         {
@@ -75,6 +100,10 @@ function _demoData() {
             type: "note-txt",
             info: {
                 txt: utilService.makeLorem(70)
+            },
+            style: {
+                backgroundColor:
+                    "#fff"
             }
         },
         {
@@ -82,6 +111,10 @@ function _demoData() {
             type: "note-txt",
             info: {
                 txt: utilService.makeLorem(10)
+            },
+            style: {
+                backgroundColor:
+                    "#fff"
             }
         },
         {
@@ -93,7 +126,7 @@ function _demoData() {
             },
             style: {
                 backgroundColor:
-                    "#00d"
+                    "#fff"
             }
         },
         {
@@ -102,13 +135,17 @@ function _demoData() {
             info: {
                 label: "Get my stuff together",
                 todos: [
-                    { txt: "Driving liscence", doneAt: null },
-                    { txt: "Coding power", doneAt: null },
-                    { txt: "Grocery", doneAt: null },
-                    { txt: "Car test", doneAt: null },
-                    { txt: "Pay bills", doneAt: null },
-                    { txt: "Draw cash", doneAt: null }
+                    { txt: "Driving liscence", doneAt: null, id: utilService.makeId() },
+                    { txt: "Coding power", doneAt: null, id: utilService.makeId() },
+                    { txt: "Grocery", doneAt: null, id: utilService.makeId() },
+                    { txt: "Car test", doneAt: null, id: utilService.makeId() },
+                    { txt: "Pay bills", doneAt: null, id: utilService.makeId() },
+                    { txt: "Draw cash", doneAt: null, id: utilService.makeId() }
                 ]
+            },
+            style: {
+                backgroundColor:
+                    "tomato"
             }
         }
     ]
@@ -183,23 +220,10 @@ function createNoteTodo(txt, noteType) {
         info: {
             label: label[0],
             todos:
-                todos.map(todo => { return { txt: todo, doneAt: null } })
+                todos.map(todo => { return { txt: todo, doneAt: null, id: utilService.makeId() } })
         }
     }
 }
-
-
-//     id: "n103",
-//     type: "note-todos",
-//     info: {
-//         label: "Get my stuff together",
-//         todos: [
-//             { txt: "Driving liscence", doneAt: null },
-//             { txt: "Coding power", doneAt: 187111111 }
-//         ]
-//     }
-// }
-// ]
 
 function deleteNote(noteId) {
     let notes = storageService.loadFromStorage(STORAGE_KEY)
@@ -248,4 +272,13 @@ function updateNoteTodo(noteToUpdate) {
     notes = notes.map(note => note.id === noteToUpdate.id ? noteToUpdate : note)
     storageService.saveToStorage(STORAGE_KEY, notes)
     return Promise.resolve(noteToUpdate)
+}
+
+function copyNote(note) {
+    let copiedNote = { ...note }
+    let notes = storageService.loadFromStorage(STORAGE_KEY)
+    copiedNote.id = utilService.makeId()
+    notes.unshift(copiedNote)
+    storageService.saveToStorage(STORAGE_KEY, notes)
+    return Promise.resolve(copiedNote)
 }

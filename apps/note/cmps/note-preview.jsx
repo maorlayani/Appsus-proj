@@ -17,12 +17,12 @@ export class NotePreview extends React.Component {
     }
 
     setOnDetailsDisplay = (isOn) => {
-        console.log(isOn)
+        // console.log(isOn)
         this.setState(({ isOnDetailsDisplay: isOn }))
     }
 
     render() {
-        const { note, onDeleteNote, onUpdetaNote, onUpdateTodoNote } = this.props
+        const { note, onDeleteNote, onUpdetaNote, onUpdateTodoNote, onCopyNote } = this.props
         const { isMouseHover, isOnDetailsDisplay } = this.state
         const { handleMouseOver, handleMouseOut, setOnDetailsDisplay } = this
         return <section >
@@ -30,9 +30,15 @@ export class NotePreview extends React.Component {
                 className={'note-preview'}
                 onMouseOver={handleMouseOver}
                 onMouseOut={handleMouseOut}
-                onClick={() => setOnDetailsDisplay(true)}>
+                onClick={() => setOnDetailsDisplay(true)}
+                style={{ backgroundColor: note.style.backgroundColor }}>
                 <DynamicCmp note={note} onUpdateTodoNote={onUpdateTodoNote} />
-                {isMouseHover && <NoteToolBar onDeleteNote={onDeleteNote} noteId={note.id} />}
+                {isMouseHover && <NoteToolBar
+                    onDeleteNote={onDeleteNote}
+                    note={note}
+                    onUpdateTodoNote={onUpdateTodoNote}
+                    onCopyNote={onCopyNote}
+                />}
             </div>
             {isOnDetailsDisplay && <NoteDetails
                 note={note}
@@ -41,6 +47,8 @@ export class NotePreview extends React.Component {
                 setOnDetailsDisplay={setOnDetailsDisplay}
                 onUpdetaNote={onUpdetaNote}
                 onUpdateTodoNote={onUpdateTodoNote}
+                onCopyNote={onCopyNote}
+
             />}
         </section >
     }
