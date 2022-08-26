@@ -16,6 +16,13 @@
     position: relative;
     /* z-index: 100; */
     overflow: visible;
+    transform-origin: 0 0;
+    /* transition: box-shadow 0.218s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.218s cubic-bezier(0.25, 0.8, 0.25, 1); */
+    transition-property: background, border, opacity, box-shadow, transform;
+    transition-duration: 0.218s, 0.218s;
+    transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1), cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition-delay: 0s, 0s;
+    transition-timing-function: ease-in;
 }
 
 .note-preview:hover {

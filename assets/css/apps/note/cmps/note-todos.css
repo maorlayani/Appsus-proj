@@ -107,3 +107,13 @@
 .todo-txt.checked:focus {
     outline: none;
 }
+
+.note-todos [name="note-todo-title"] {
+    width: 100%;
+    padding: 12px 16px;
+    border: none;
+}
+
+.note-todos [name="note-todo-title"]:focus {
+    outline: none;
+}

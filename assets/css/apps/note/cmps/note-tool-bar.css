@@ -25,16 +25,39 @@
 }
 
 .btn-note-toolbar.btn-color-picker {
-    left: 40px
+    left: 40px;
 }
 
 .btn-note-toolbar.btn-copy {
-    left: 80px
+    left: 80px;
 }
 
 .btn-note-toolbar.btn-pin {
-    left: 120px
+    left: 120px;
 }
+
+.btn-note-toolbar.btn-email {
+    left: 160px;
+}
+
+.btn-note-toolbar.btn-close {
+    left: 540px;
+    line-height: 1.25rem;
+    width: unset;
+    padding: 8px 24px;
+    color: rgba(10, 10, 10, .87);
+    letter-spacing: .01785714em;
+    font-weight: 500;
+    border-radius: 4px;
+    outline: none;
+    opacity: 0.87;
+}
+
+.btn-close:hover {
+    background-color: rgba(95, 99, 104, 0.157);
+    cursor: pointer;
+}
+
 
 .btn-delete {
     background-image: url("https://img.icons8.com/material-outlined/24/000000/trash--v1.png");
@@ -60,15 +83,31 @@
     background-image: url('https://img.icons8.com/material-rounded/24/000000/copy.png');
 }
 
+.btn-email {
+    background-image: url('https://img.icons8.com/material-outlined/24/000000/new-post.png');
+}
+
+.btn-email:hover {
+    cursor: pointer;
+    opacity: 0.87;
+    background-color: rgba(95, 99, 104, 0.157);
+}
+
 .btn-copy:hover {
     cursor: pointer;
     opacity: 0.87;
     background-color: rgba(95, 99, 104, 0.157);
 }
 
-.btn-pin {
+.btn-pin.empty {
     background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4KICA8cGF0aCBmaWxsPSJub25lIiBkPSJNMCAwaDI0djI0SDB6Ii8+CiAgPHBhdGggZmlsbD0iIzAwMCIgZD0iTTE3IDR2N2wyIDN2MmgtNnY1bC0xIDEtMS0xdi01SDV2LTJsMi0zVjRjMC0xLjEuOS0yIDItMmg2YzEuMTEgMCAyIC44OSAyIDJ6TTkgNHY3Ljc1TDcuNSAxNGg5TDE1IDExLjc1VjRIOXoiLz4KPC9zdmc+Cg==');
 }
+
+.btn-pin.full {
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4KICA8cGF0aCBmaWxsPSJub25lIiBkPSJNMCAwaDI0djI0SDB6Ii8+CiAgPHBhdGggZmlsbD0iIzAwMCIgZD0iTTE3IDRhMiAyIDAgMCAwLTItMkg5Yy0xLjEgMC0yIC45LTIgMnY3bC0yIDN2Mmg2djVsMSAxIDEtMXYtNWg2di0ybC0yLTNWNHoiLz4KPC9zdmc+Cg==');
+}
+
+
 
 .btn-pin:hover {
     cursor: pointer;
@@ -83,7 +122,7 @@
     border-radius: 8px;
     position: relative;
     top: -15px;
-    left: -200px;
+    left: 150%;
     transform: translate(-50%, -50%);
     z-index: 200;
     overflow: visible;

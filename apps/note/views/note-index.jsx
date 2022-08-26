@@ -19,27 +19,27 @@ export class NoteIndex extends React.Component {
     loadNotes = () => {
         noteService.query()
             .then((notes) => {
-                let { pinnedNotes, unPinnedNotes } = this.state
-                pinnedNotes = notes.filter(note => (note.isPinned))
-                unPinnedNotes = notes.filter(note => (!note.isPinned))
-                this.setState({ notes, pinnedNotes, unPinnedNotes })
+                // let { pinnedNotes, unPinnedNotes } = this.state
+                // pinnedNotes = notes.filter(note => (note.isPinned))
+                // unPinnedNotes = notes.filter(note => (!note.isPinned))
+                this.setState({ notes }, this.filterNotesByPinned)
             })
     }
 
-    onAddNote = (txt, noteType) => {
-        noteService.addNote(txt, noteType)
+    onAddNote = (noteTitle, noteTxt, noteType) => {
+        noteService.addNote(noteTitle, noteTxt, noteType)
             .then((note) => {
-                this.setState(({ notes }) => ({ notes: [note, ...notes] }))
+                this.setState(({ notes }) => ({ notes: [note, ...notes] }), this.filterNotesByPinned)
             })
     }
 
-    onUpdetaNote = (val, note) => {
-        if (!val) return
+    onUpdetaNote = (title, txt, note) => {
+        // if (!title && !txt) return
         let { notes } = this.state
-        noteService.updateNote(val, note)
+        noteService.updateNote(title, txt, note)
             .then((updatedNote) => {
-                notes = notes.map(note => notes.id === updatedNote.id ? updatedNote : note)
-                this.setState({ notes })
+                notes = notes.map(note => note.id === updatedNote.id ? updatedNote : note)
+                this.setState({ notes }, this.filterNotesByPinned)
             })
     }
 
@@ -47,8 +47,8 @@ export class NoteIndex extends React.Component {
         let { notes } = this.state
         noteService.updateNoteTodo(note)
             .then((updatedNote) => {
-                notes = notes.map(note => notes.id === updatedNote.id ? updatedNote : note)
-                this.setState({ notes })
+                notes = notes.map(note => note.id === updatedNote.id ? updatedNote : note)
+                this.setState({ notes }, this.filterNotesByPinned)
             })
     }
 
@@ -57,7 +57,7 @@ export class NoteIndex extends React.Component {
         noteService.deleteNote(noteId)
             .then(() => {
                 notes = notes.filter(note => note.id !== noteId)
-                this.setState({ notes })
+                this.setState({ notes }, this.filterNotesByPinned)
             })
     }
 
@@ -67,7 +67,7 @@ export class NoteIndex extends React.Component {
         noteService.copyNote(copiedNote)
             .then((note) => {
                 notes.unshift(note)
-                this.setState({ notes })
+                this.setState({ notes }, this.filterNotesByPinned)
             })
     }
 
@@ -76,6 +76,13 @@ export class NoteIndex extends React.Component {
             .then(() => {
                 this.loadNotes()
             })
+    }
+
+    filterNotesByPinned = () => {
+        let { pinnedNotes, unPinnedNotes, notes } = this.state
+        pinnedNotes = notes.filter(note => (note.isPinned))
+        unPinnedNotes = notes.filter(note => (!note.isPinned))
+        this.setState({ pinnedNotes, unPinnedNotes })
     }
 
     render() {

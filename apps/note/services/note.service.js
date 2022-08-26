@@ -18,6 +18,7 @@ function _demoData() {
             type: "note-txt",
             isPinned: true,
             info: {
+                title: '',
                 txt: utilService.makeLorem(35)
             },
             style: {
@@ -30,6 +31,7 @@ function _demoData() {
             type: "note-txt",
             isPinned: true,
             info: {
+                title: '',
                 txt: utilService.makeLorem(50)
             },
             style: {
@@ -42,6 +44,7 @@ function _demoData() {
             type: "note-txt",
             isPinned: false,
             info: {
+                title: '',
                 txt: utilService.makeLorem(20)
             },
             style: {
@@ -54,6 +57,7 @@ function _demoData() {
             type: "note-txt",
             isPinned: false,
             info: {
+                title: '',
                 txt: utilService.makeLorem(15)
             },
             style: {
@@ -79,6 +83,7 @@ function _demoData() {
             type: "note-txt",
             isPinned: true,
             info: {
+                title: '',
                 txt: "Fullstack Me Baby!"
             },
             style: {
@@ -92,7 +97,7 @@ function _demoData() {
             isPinned: false,
             info: {
                 url: "https://www.youtube.com/embed/8aGhZQkoFbQ",
-                title: "EVENT LOOP "
+                title: "EVENT LOOP"
             },
             style: {
                 backgroundColor:
@@ -104,6 +109,7 @@ function _demoData() {
             type: "note-txt",
             isPinned: false,
             info: {
+                title: '',
                 txt: utilService.makeLorem(70)
             },
             style: {
@@ -116,6 +122,7 @@ function _demoData() {
             type: "note-txt",
             isPinned: false,
             info: {
+                title: '',
                 txt: utilService.makeLorem(10)
             },
             style: {
@@ -170,67 +177,90 @@ function query() {
     return Promise.resolve(notes)
 }
 
-function addNote(txt, noteType) {
+function addNote(noteTitle, noteTxt, noteType) {
     let newNote
-    if (noteType === 'txt') newNote = createNoteTxt(txt)
-    else if (noteType === 'img') newNote = createNoteImg(txt, noteType)
-    else if (noteType === 'video') newNote = createNoteVideo(txt, noteType)
-    else if (noteType === 'todo') newNote = createNoteTodo(txt, noteType)
-    console.log('noteTODO', newNote)
+    if (noteType === 'txt') newNote = createNoteTxt(noteTitle, noteTxt)
+    else if (noteType === 'img') newNote = createNoteImg(noteTitle, noteTxt, noteType)
+    else if (noteType === 'video') newNote = createNoteVideo(noteTitle, noteTxt, noteType)
+    else if (noteType === 'todo') newNote = createNoteTodo(noteTitle, noteTxt, noteType)
+    // console.log('noteTODO', newNote)
     let notes = storageService.loadFromStorage(STORAGE_KEY)
     notes.unshift(newNote)
     storageService.saveToStorage(STORAGE_KEY, notes)
     return Promise.resolve(newNote)
 }
 
-function createNoteTxt(txt) {
+function createNoteTxt(title, txt) {
     return {
         id: utilService.makeId(),
         type: "note-txt",
+        isPinned: false,
         info: {
+            title,
             txt
+        },
+        style: {
+            backgroundColor:
+                "#fff"
         }
     }
 }
 
-function createNoteImg(txt, noteType) {
+function createNoteImg(title, txt, noteType) {
     return {
         id: utilService.makeId(),
         type: 'note-' + noteType,
+        isPinned: false,
         info: {
             url: txt,
-            title: ''
+            title
+        },
+        style: {
+            backgroundColor:
+                "#fff"
         }
     }
 }
 
-function createNoteVideo(txt, noteType) {
+function createNoteVideo(title, txt, noteType) {
     let url = txt
     url = url.replace('watch?v=', 'embed/')
     url = url.substring(0, 41)
     return {
         id: utilService.makeId(),
         type: 'note-' + noteType,
+        isPinned: false,
         info: {
-            url: url,
+            url,
+            title
+        },
+        style: {
+            backgroundColor:
+                "#fff"
         }
     }
 }
 
-function createNoteTodo(txt, noteType) {
+function createNoteTodo(label, txt, noteType) {
 
     let todos = txt.split(',')
-    console.log('before splice', todos)
-    const label = todos.splice(0, 1)
-    console.log('after splice', todos)
+    // console.log('before splice', todos)
+    // const label = todos.splice(0, 1)
+    // console.log('after splice', todos)
     return {
         id: utilService.makeId(),
         type: 'note-' + noteType,
+        isPinned: false,
         info: {
-            label: label[0],
+            label,
             todos:
                 todos.map(todo => { return { txt: todo, doneAt: null, id: utilService.makeId() } })
+        },
+        style: {
+            backgroundColor:
+                "#fff"
         }
+
     }
 }
 
@@ -241,17 +271,18 @@ function deleteNote(noteId) {
     return Promise.resolve()
 }
 
-function updateNote(val, note) {
+function updateNote(title, txt, note) {
     let updatedNote
-    if (note.type === 'note-txt') updatedNote = updateNoteTxt(val, note)
-    else if (note.type === 'note-img') updatedNote = updateNoteImg(val, note)
-    else if (note.type === 'note-video') updatedNote = updateNoteVideo(val, note)
+    if (note.type === 'note-txt') updatedNote = updateNoteTxt(title, txt, note)
+    else if (note.type === 'note-img') updatedNote = updateNoteImg(title, note)
+    else if (note.type === 'note-video') updatedNote = updateNoteVideo(title, note)
 
     return Promise.resolve(updatedNote)
 }
 
-function updateNoteTxt(val, noteToUpdate) {
-    noteToUpdate.info.txt = val
+function updateNoteTxt(title, txt, noteToUpdate) {
+    noteToUpdate.info.txt = txt
+    noteToUpdate.info.title = title
     let notes = storageService.loadFromStorage(STORAGE_KEY)
     notes = notes.map(note => note.id === noteToUpdate.id ? noteToUpdate : note)
     storageService.saveToStorage(STORAGE_KEY, notes)
@@ -284,7 +315,7 @@ function updateNoteTodo(noteToUpdate) {
 }
 
 function copyNote(note) {
-    let copiedNote = { ...note }
+    let copiedNote = JSON.parse(JSON.stringify(note))
     let notes = storageService.loadFromStorage(STORAGE_KEY)
     copiedNote.id = utilService.makeId()
     notes.unshift(copiedNote)

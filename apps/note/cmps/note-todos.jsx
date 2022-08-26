@@ -3,6 +3,7 @@ export class NoteTodos extends React.Component {
     state = {
         todos: this.props.note.info.todos,
         todoValues: {},
+        todoLabelValue: this.props.note.info.label,
         isMouseHover: false
 
     }
@@ -56,45 +57,62 @@ export class NoteTodos extends React.Component {
     // }
 
     changeHandler = ({ target }, updtaedTodo) => {
-        // console.log(target)
         const field = target.name
         const value = target.value
-        // updtaedTodo.txt = value
+        updtaedTodo.txt = target.value
         this.setState((prevState) => ({
             todoValues: {
                 ...prevState.todoValues,
                 [field]: value
             }
         }), () => {
-            // updtaedTodo.txt = value
             let { todos } = this.state
             let { note } = this.props
             todos = todos.map(todo => todo.id === updtaedTodo.id ? updtaedTodo : todo)
+            note.info.todos = todos
             this.setState({ todos }, () => {
-                note.info.todos = this.state.todos
-                this.props.updadteTxtTodoNote(note)
+                this.props.onUpdateTodoNote(note)
             })
         }
         )
-
     }
 
     changeHandler1 = () => {
 
     }
 
+    changeHandlerLabel = ({ target }) => {
+        const value = target.value
+        let { note } = this.props
+        note.info.label = value
+        this.setState({ todoLabelValue: value }, () => {
+            this.props.onUpdateTodoNote(note)
+        })
+    }
+
 
     render() {
         const { isOnDetailsDisplay, note } = this.props
         const { info } = this.props.note
-        const { todoValues } = this.state
-        const { onLableClick, onCheckboxClick, changeHandler, changeHandler1, onDeleteTodo } = this
+        const { todoValues, todoLabelValue } = this.state
+        const { onLableClick, onCheckboxClick, changeHandler, changeHandler1, onDeleteTodo, changeHandlerLabel } = this
 
         return <div className="note-todos">
-            < h4 > {info.label}</h4 >
+            {/* < h4 > {info.label}</h4 > */}
+            {!isOnDetailsDisplay && <h4>{info.label}</h4>}
+            {isOnDetailsDisplay && <input
+                type="text"
+                name="note-todo-title"
+                placeholder="Title"
+                value={todoLabelValue}
+                onChange={changeHandlerLabel}
+                style={{ backgroundColor: note.style.backgroundColor }}
+            ></input>}
             {
                 info.todos.map((todo, idx) => {
-                    return <div key={todo.txt} className={'note-todo-container flex ' + (isOnDetailsDisplay ? 'display-Details' : '')}>
+                    return <div
+                        key={todo.id}
+                        className={'note-todo-container flex ' + (isOnDetailsDisplay ? 'display-Details' : '')}>
                         <input
                             type="checkbox"
                             name="todo-checkbox"

@@ -7,8 +7,7 @@ export class NoteToolBar extends React.Component {
 
     showColorDropDown = (ev) => {
         ev.stopPropagation()
-        this.setState((prevState) => ({ isShowColorDropdown: !prevState.isShowColorDropdown }), () => {
-        })
+        this.setState((prevState) => ({ isShowColorDropdown: !prevState.isShowColorDropdown }))
     }
 
     onSelectbackgroundColor = (ev, color) => {
@@ -25,12 +24,18 @@ export class NoteToolBar extends React.Component {
         console.log(note)
         this.props.onSortNotesByPinned(note)
     }
+    onCloseNote = () => {
+        this.props.setOnDetailsDisplay(false)
+    }
 
+    onToEmail = (ev, note) => {
+        ev.stopPropagation()
+    }
 
     render() {
-        const { onDeleteNote, note, onCopyNote } = this.props
+        const { onDeleteNote, note, onCopyNote, isOnDetailsDisplay } = this.props
         const { isShowColorDropdown } = this.state
-        const { showColorDropDown, colors, onSelectbackgroundColor, onTogglePinned } = this
+        const { showColorDropDown, colors, onSelectbackgroundColor, onTogglePinned, onCloseNote, onToEmail } = this
 
         return <section
             className="note-tool-bar">
@@ -38,7 +43,9 @@ export class NoteToolBar extends React.Component {
             <button className="btn-note-toolbar btn-delete" onClick={() => onDeleteNote(note.id)}></button>
             <button className="btn-note-toolbar btn-color-picker" onClick={(ev) => showColorDropDown(ev)}></button>
             <button className="btn-note-toolbar btn-copy" onClick={(ev) => onCopyNote(ev, note)}></button>
-            <button className="btn-note-toolbar btn-pin" onClick={(ev) => onTogglePinned(ev, note)}></button>
+            <button className={"btn-note-toolbar btn-pin " + (note.isPinned ? 'full' : 'empty')} onClick={(ev) => onTogglePinned(ev, note)}></button>
+            <button className="btn-note-toolbar btn-email" onClick={(ev) => onToEmail(ev, note)}></button>
+            {isOnDetailsDisplay && <button className="btn-note-toolbar btn-close" onClick={(ev) => onCloseNote(ev, note)}>Close</button>}
 
             <div className={'toolbar-color-container flex ' + (isShowColorDropdown ? 'show' : '')}>
                 {colors.map(color => {
