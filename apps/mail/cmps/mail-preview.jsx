@@ -1,8 +1,6 @@
-const { Link } = ReactRouterDOM
-
-export function MailPreview({ mail, onSelectMail }) {
+export function MailPreview({ mail }) {
   return (
-    <article className="mail-preview" onClick={() => onSelectMail(mail.id)}>
+    <article className="mail-preview">
       <h4 className="sent-by">{mail.sentBy}</h4>
 
       <div className="mail-preview-content">

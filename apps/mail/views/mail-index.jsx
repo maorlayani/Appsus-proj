@@ -1,5 +1,5 @@
 const Router = ReactRouterDOM.HashRouter
-const { Route, Link } = ReactRouterDOM
+const { Route, Link, Switch } = ReactRouterDOM
 
 import { MailFilter } from '../cmps/mail-filter.jsx'
 import { MailFolderList } from '../cmps/mail-folder-list.jsx'
@@ -194,13 +194,18 @@ export class MailIndex extends React.Component {
 
         <Router>
           <section className="main-content-app">
-            <Route path="/mail/details/:mailId" component={MailDetails} />
-            <Route path="/mail/compose" component={MailCompose} />
-            {/* <Route path="/mail/details/:mailId"> 
+            <Switch>
+              <Route path="/mail/details/:mailId" component={MailDetails} />
+              <Route path="/mail/compose" component={MailCompose} />
+              <Route path="/mail" component={MailList} />
+            </Switch>
+          </section>
+        </Router>
+        {/* <Route path="/mail/details/:mailId"> 
               <MailDetails />
             </Route> */}
 
-            {/* <Route exact path="/mail">
+        {/* <Route exact path="/mail">
               <MailList
                 mails={getTypeMails()}
                 trash={trash}
@@ -211,7 +216,7 @@ export class MailIndex extends React.Component {
               />
             </Route> */}
 
-            {{ doRenderList } && (
+        {/* {doRenderList && (
               <MailList
                 mails={getTypeMails()}
                 trash={trash}
@@ -220,20 +225,20 @@ export class MailIndex extends React.Component {
                 onRemoveMail={onRemoveMail}
                 onMoveTrashMail={onMoveTrashMail}
               />
-            )}
+            )} */}
 
-            {/* {selectedMail && (
+        {/* {selectedMail && (
             <MailDetails
               mail={selectedMail}
               onGoBack={() => onSelectMail()}
               onRemoveMail={onRemoveMail}
             />
           )} */}
-            {/* {isCompose && (
+        {/* {isCompose && (
               <MailCompose onCompose={onCompose} inputRef={inputRef} />
             )} */}
-          </section>
-        </Router>
+        {/* </section>
+        </Router> */}
       </section>
     )
   }
