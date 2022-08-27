@@ -1,5 +1,5 @@
 import { AppHeader } from "./cmps/app-header.jsx"
-import { About } from "./views/about.jsx"
+// import { About } from "./views/about.jsx"
 import { Home } from "./views/home.jsx"
 import { MailIndex } from "./apps/mail/views/mail-index.jsx"
 import { NoteIndex } from "./apps/note/views/note-index.jsx"
@@ -14,7 +14,7 @@ export function App() {
             <Switch>
                 <Route path="/mail" component={MailIndex} />
                 <Route path="/note" component={NoteIndex} />
-                <Route path="/about" component={About} />
+                {/* <Route path="/about" component={About} /> */}
                 <Route path="/" component={Home} />
             </Switch>
         </section>

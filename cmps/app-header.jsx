@@ -41,12 +41,12 @@ class _AppHeader extends React.Component {
                 <div className="home-title">Home</div>
               </div>
             </NavLink>
-            <NavLink to="/about" onClick={showHeaderDropDown}>
+            {/* <NavLink to="/about" onClick={showHeaderDropDown}>
               <div className="about-container">
                 <div className="about"></div>
                 <div className="about-title">About</div>
               </div>
-            </NavLink>
+            </NavLink> */}
           </div>
         </nav>
 
