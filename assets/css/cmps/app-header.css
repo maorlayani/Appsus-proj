@@ -3,7 +3,8 @@ header {
   width: 100%;
   background-color: rgba(255, 255, 255, 0.8);
   color: #202124;
-  box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
+  border-bottom: 1px solid rgb(60 64 67 / 30%);
+  font-family: Roboto-Regular, Arial, sans-serif;
 
 }
 
@@ -13,19 +14,6 @@ header {
   padding: 20px 0;
 }
 
-/* nav a {
-  margin: 0.5em;
-}
-
-nav a:active {
-  color: purple;
-}
-
-nav a.active {
-  color: darkblue;
-  font-weight: bold;
-  text-decoration: overline;
-} */
 .app-header h3 {
   margin-left: 100px;
 }
@@ -43,8 +31,6 @@ nav a.active {
   height: 40px;
   width: 40px;
   opacity: 0.87;
-  /* position: relative;
-  left: 150px; */
   margin-left: 100px;
 }
 
@@ -62,7 +48,6 @@ nav a.active {
   top: 0;
   box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
   border-radius: 8px;
-  /* overflow: visible; */
   transition: transform .2s cubic-bezier(.333, 0, 0, 1);
   opacity: 0;
 }
@@ -85,6 +70,8 @@ nav a.active {
   left: 10px;
   border-radius: 8px;
   font-size: 15px;
+  color: #202124;
+
 }
 
 .keep {
@@ -103,6 +90,20 @@ nav a.active {
 .keep.keep-app {
   border: none;
   margin-left: 120px;
+  transform: scale(calc(4/6));
+}
+
+.keep.keep-app span {
+  padding-left: 4px;
+  color: #5f6368;
+  opacity: 1;
+  font-family: "Product Sans", Arial, sans-serif;
+  font-size: 33px;
+  line-height: 24px;
+  vertical-align: middle;
+  position: relative;
+  left: 80px;
+  top: 20px
 }
 
 .keep-app:hover {
@@ -141,7 +142,6 @@ nav a.active {
   position: relative;
   top: -10px;
   left: 0;
-  /* transform: scale(calc(5/6)); */
 }
 
 .mail-title {

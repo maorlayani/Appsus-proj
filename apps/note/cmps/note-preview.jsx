@@ -27,7 +27,7 @@ export class NotePreview extends React.Component {
         const { handleMouseOver, handleMouseOut, setOnDetailsDisplay } = this
         return <section >
             <div
-                className={'note-preview'}
+                className="note-preview"
                 onMouseOver={handleMouseOver}
                 onMouseOut={handleMouseOut}
                 onClick={() => setOnDetailsDisplay(true)}

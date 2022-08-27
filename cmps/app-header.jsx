@@ -19,7 +19,7 @@ class _AppHeader extends React.Component {
       <header className="app-header">
         <Link to={"/" + (location.pathname === '/note' ? 'note' : '')}>
           {location.pathname !== '/note' && <h3>APPSUS</h3>}
-          {location.pathname === '/note' && <div className="keep keep-app"></div>}
+          {location.pathname === '/note' && <div className="keep keep-app"><span>Keep</span></div>}
         </Link>
         <nav>
           <div className="drop-down" onClick={showHeaderDropDown}></div>

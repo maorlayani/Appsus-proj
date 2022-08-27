@@ -1,3 +1,5 @@
+import { LongTxt } from '../../../cmps/long-txt.jsx'
+
 export class NoteTodos extends React.Component {
 
     state = {
@@ -99,7 +101,8 @@ export class NoteTodos extends React.Component {
 
         return <div className="note-todos">
             {/* < h4 > {info.label}</h4 > */}
-            {!isOnDetailsDisplay && <h4>{info.label}</h4>}
+            {/* {!isOnDetailsDisplay && <h4>{info.label}</h4>} */}
+            {!isOnDetailsDisplay && <LongTxt title={info.label} />}
             {isOnDetailsDisplay && <input
                 type="text"
                 name="note-todo-title"
@@ -125,7 +128,8 @@ export class NoteTodos extends React.Component {
                         {!isOnDetailsDisplay && <label
                             className={'todo-label ' + (todo.doneAt ? 'is-done' : '')}
                             htmlFor={todo.txt}
-                            onClick={onLableClick} >{todo.txt}
+                            // onClick={onLableClick} >{todo.txt}
+                            onClick={onLableClick} ><LongTxt txt={todo.txt} isTodo={true} />
                         </label>}
                         {isOnDetailsDisplay && <input
                             className={'todo-txt ' + (todo.doneAt ? 'checked' : '')}

@@ -1,3 +1,5 @@
+import { LongTxt } from '../../../cmps/long-txt.jsx'
+
 export class NoteTxt extends React.Component {
     state = {
         textAreaValue: this.props.note.info.txt,
@@ -26,7 +28,8 @@ export class NoteTxt extends React.Component {
         const { noteTxtChangeHandler } = this
 
         return <div className="note-txt">
-            {!isOnDetailsDisplay && <h4>{note.info.title}</h4>}
+            {/* {!isOnDetailsDisplay && <h4>{note.info.title}</h4>} */}
+            {!isOnDetailsDisplay && <LongTxt title={note.info.title} />}
             {isOnDetailsDisplay && <input
                 type="text"
                 name="TitleValue"
@@ -35,7 +38,8 @@ export class NoteTxt extends React.Component {
                 onChange={noteTxtChangeHandler}
                 style={{ backgroundColor: note.style.backgroundColor }}
             ></input>}
-            {!isOnDetailsDisplay && <p>{note.info.txt}</p>}
+            {/* {!isOnDetailsDisplay && <p>{note.info.txt}</p>} */}
+            {!isOnDetailsDisplay && <p className={(!note.info.title ? 'add-pad' : '')}><LongTxt txt={note.info.txt} /></p>}
             {isOnDetailsDisplay && <textarea
                 type="textarea"
                 name="textAreaValue"

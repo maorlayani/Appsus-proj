@@ -96,6 +96,7 @@ export class NoteCompose extends React.Component {
                         placeholder="Title"
                         onChange={changeHandler} />}
                     <input
+                        className={(isOnFocus ? 'openend' : '')}
                         type="text"
                         name="noteTxt"
                         id="noteTxt"

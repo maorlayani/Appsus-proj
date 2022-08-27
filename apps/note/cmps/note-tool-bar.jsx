@@ -41,7 +41,7 @@ export class NoteToolBar extends React.Component {
         const { showColorDropDown, colors, onSelectbackgroundColor, onTogglePinned, onCloseNote, onToEmail } = this
 
         return <section
-            className="note-tool-bar">
+            className={"note-tool-bar " + (isOnDetailsDisplay ? 'border' : '')}>
 
             <button className="btn-note-toolbar btn-delete" onClick={() => onDeleteNote(note.id)}></button>
             <button className="btn-note-toolbar btn-color-picker" onClick={(ev) => showColorDropDown(ev)}></button>

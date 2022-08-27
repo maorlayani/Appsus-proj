@@ -1,13 +1,19 @@
 .note-tool-bar {
     width: 243px;
-    /* background-color: rgb(255, 255, 255); */
-    /* background-color: rgba(255, 255, 255, 0.692); */
     position: absolute;
     bottom: 0;
     left: 0;
     border-radius: 8px;
     background-color: transparent;
 }
+
+.note-tool-bar.border {
+    width: 628px;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
+}
+
 
 .btn-note-toolbar {
     border: none;
@@ -21,7 +27,7 @@
     height: 32px;
     width: 32px;
     position: absolute;
-    top: 15px;
+    top: 10px;
 }
 
 .btn-note-toolbar.btn-color-picker {
@@ -47,17 +53,17 @@
     padding: 8px 24px;
     color: rgba(10, 10, 10, .87);
     letter-spacing: .01785714em;
-    font-weight: 500;
     border-radius: 4px;
     outline: none;
     opacity: 0.87;
+    font-family: Roboto-Medium, Arial, sans-serif;
+    font-size: .875rem;
 }
 
 .btn-close:hover {
     background-color: rgba(95, 99, 104, 0.157);
     cursor: pointer;
 }
-
 
 .btn-delete {
     background-image: url("https://img.icons8.com/material-outlined/24/000000/trash--v1.png");
@@ -107,8 +113,6 @@
     background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4KICA8cGF0aCBmaWxsPSJub25lIiBkPSJNMCAwaDI0djI0SDB6Ii8+CiAgPHBhdGggZmlsbD0iIzAwMCIgZD0iTTE3IDRhMiAyIDAgMCAwLTItMkg5Yy0xLjEgMC0yIC45LTIgMnY3bC0yIDN2Mmg2djVsMSAxIDEtMXYtNWg2di0ybC0yLTNWNHoiLz4KPC9zdmc+Cg==');
 }
 
-
-
 .btn-pin:hover {
     cursor: pointer;
     opacity: 0.87;
@@ -122,7 +126,6 @@
     border-radius: 8px;
     position: relative;
     top: -15px;
-    left: 150%;
     transform: translate(-50%, -50%);
     z-index: 200;
     overflow: visible;
