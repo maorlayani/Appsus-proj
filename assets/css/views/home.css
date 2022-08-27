@@ -1,0 +1,35 @@
+.home-page {
+    font-family: Arial, Helvetica, sans-serif;
+    position: fixed;
+    background-image: url('../../img/hero-img3.jpg');
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+}
+
+.home-page .hero-txt {
+    color: rgb(60, 60, 60);
+    font-size: 55px;
+    text-align: center;
+    font-weight: 700;
+    margin-top: 100px;
+    padding: 0 30px;
+}
+
+.home-btn {
+    color: rgb(60, 60, 60);
+    font-size: 30px;
+    margin-top: 20px;
+    background-color: transparent;
+    border-radius: 8px;
+    padding: 10px;
+    font-weight: 600;
+}
+
+.home-btn:hover {
+    background-color: rgb(60, 60, 60);
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.845);
+}

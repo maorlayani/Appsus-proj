@@ -7,7 +7,7 @@ export class NoteCompose extends React.Component {
         isOnFocus: false,
         noteType: null,
         noteTxt: '',
-        // noteTitle: '',
+        noteTitle: '',
         inputPlaceholder: 'Take a note...',
         isNoteImg: false
     }
@@ -28,12 +28,14 @@ export class NoteCompose extends React.Component {
 
     onSubmitNote = (ev) => {
         ev.preventDefault()
-        const { noteTxt, noteType } = this.state
-        console.log('on submit', noteTxt)
-        this.props.onAddNote(noteTxt, noteType)
+        this.setState({ isOnFocus: false })
+        const { noteTitle, noteTxt, noteType } = this.state
+        // console.log('on submit', noteTxt)
+        this.props.onAddNote(noteTitle, noteTxt, noteType)
         this.setState(({
             noteType: null,
             noteTxt: '',
+            noteTitle: '',
             inputPlaceholder: 'Take a note...',
         }))
     }
@@ -48,7 +50,8 @@ export class NoteCompose extends React.Component {
 
     onInputFocus = () => {
         if (!this.state.noteType) this.onSetNoteType('txt')
-        else return
+        this.setState({ isOnFocus: true })
+        // else return
     }
 
     onSetNoteType = (type) => {
@@ -78,32 +81,52 @@ export class NoteCompose extends React.Component {
     }
 
     render() {
-        const { isOnFocus, noteTxt, inputPlaceholder, noteType } = this.state
+        const { isOnFocus, noteTxt, inputPlaceholder, noteType, noteTitle } = this.state
         const { isInputOnFocus, onInputFocus, changeHandler, onSubmitNote, onSetNoteType, noteTxtInputRef } = this
-
+        // console.log('isOnFocus', isOnFocus)
         return <section className="note-compose">
 
-            {/* {isOnFocus && <input type="text" name="noteTitle" id="noteTitle" placeholder="Title" />} */}
-            {/* <div className="note-compose-container flex align-center space-between" onClick={isInputOnFocus} > */}
-            {/* <div className="note-compose-container flex align-center" onClick={isInputOnFocus} >
-                {!isOnFocus && <span>Take a note..</span>}
-                {isOnFocus && <form onSubmit={onSubmitNote}>
-                    <input type="text" name="noteTxt" id="noteTxt" ref={noteTxtInputRef} placeholder={txtInputPlaceholder} onChange={changeHandler} />
-                </form>}
-                {!isOnFocus && <div className="btn-compose-container">
-                    <button className="btn-note-compose btn-add-todo"></button>
-                    <button className="btn-note-compose btn-add-img" onClick={onAddNoteImg}></button>
-                </div>}
-            </div> */}
-            <div className="note-compose-container flex align-center space-between" >
+            <div className="note-compose-container flex align-center" >
                 <form onSubmit={onSubmitNote}>
-                    <input type="text" name="noteTxt" id="noteTxt" value={noteTxt} ref={noteTxtInputRef} placeholder={inputPlaceholder} onChange={changeHandler} onClick={onInputFocus} />
+                    {isOnFocus && <input
+                        type="text"
+                        name="noteTitle"
+                        id="noteTitle"
+                        value={noteTitle}
+                        placeholder="Title"
+                        onChange={changeHandler} />}
+                    <input
+                        type="text"
+                        name="noteTxt"
+                        id="noteTxt"
+                        value={noteTxt}
+                        ref={noteTxtInputRef}
+                        placeholder={inputPlaceholder}
+                        onChange={changeHandler}
+                        onClick={onInputFocus} />
+                    {isOnFocus && <button className="btn-compose-add-note" type="submit">Add Note</button>}
                 </form>
                 <div className="btn-compose-container">
-                    <button className={'btn-note-compose btn-add-txt ' + (noteType === 'txt' ? 'active' : '')} onClick={() => onSetNoteType('txt')}></button>
-                    <button className={'btn-note-compose btn-add-video ' + (noteType === 'video' ? 'active' : '')} onClick={() => onSetNoteType('video')}></button>
-                    <button className={'btn-note-compose btn-add-todo ' + (noteType === 'todo' ? 'active' : '')} onClick={() => onSetNoteType('todo')}></button>
-                    <button className={'btn-note-compose btn-add-img ' + (noteType === 'img' ? 'active' : '')} onClick={() => onSetNoteType('img')}></button>
+                    <button
+                        className={'btn-note-compose btn-add-txt ' + (noteType === 'txt' ? 'active' : '')}
+                        onClick={() => onSetNoteType('txt')}>
+
+                    </button>
+                    <button
+                        className={'btn-note-compose btn-add-video ' + (noteType === 'video' ? 'active' : '')}
+                        onClick={() => onSetNoteType('video')}>
+
+                    </button>
+                    <button
+                        className={'btn-note-compose btn-add-todo ' + (noteType === 'todo' ? 'active' : '')}
+                        onClick={() => onSetNoteType('todo')}>
+
+                    </button>
+                    <button
+                        className={'btn-note-compose btn-add-img ' + (noteType === 'img' ? 'active' : '')}
+                        onClick={() => onSetNoteType('img')}>
+
+                    </button>
                 </div>
             </div>
         </section >

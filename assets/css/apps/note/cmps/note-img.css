@@ -1,4 +1,16 @@
 .note-img img {
     border-top-left-radius: .5em;
     border-top-right-radius: .5em;
+    /* width: 630px; */
+
+}
+
+.note-img [name="note-img-title"] {
+    /* width: 100%; */
+    padding: 12px 16px;
+    border: none;
+}
+
+.note-img [name="note-img-title"]:focus {
+    outline: none;
 }

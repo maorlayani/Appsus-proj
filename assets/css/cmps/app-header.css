@@ -1,6 +1,10 @@
 header {
-  background: rgb(31, 207, 207);
-  border-bottom: 2px solid rgb(213, 36, 36);
+  max-height: 80px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #202124;
+  box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
+
 }
 
 .app-header {
@@ -9,7 +13,7 @@ header {
   padding: 20px 0;
 }
 
-nav a {
+/* nav a {
   margin: 0.5em;
 }
 
@@ -21,4 +25,205 @@ nav a.active {
   color: darkblue;
   font-weight: bold;
   text-decoration: overline;
+} */
+.app-header h3 {
+  margin-left: 100px;
+}
+
+.drop-down {
+  background-image: url('https://img.icons8.com/material-outlined/24/000000/circled-menu.png');
+  border: none;
+  background-color: transparent;
+  background-size: 24px 24px;
+  margin: 0;
+  opacity: 0.54;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  background-position: center;
+  height: 40px;
+  width: 40px;
+  opacity: 0.87;
+  /* position: relative;
+  left: 150px; */
+  margin-left: 100px;
+}
+
+.drop-down:hover {
+  cursor: pointer;
+  background-color: rgba(95, 99, 104, 0.157);
+}
+
+.drop-down-content {
+  width: 285px;
+  height: 200px;
+  background-color: #fff;
+  position: relative;
+  right: 1500%;
+  top: 0;
+  box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
+  border-radius: 8px;
+  /* overflow: visible; */
+  transition: transform .2s cubic-bezier(.333, 0, 0, 1);
+  opacity: 0;
+}
+
+.drop-down-content.show {
+  opacity: 1;
+  transition-property: opacity;
+  transition-duration: 0.218s;
+  transition-timing-function: ease-in;
+  z-index: 400;
+  right: 120px;
+}
+
+.keep-container {
+  padding: 10px;
+  width: 85px;
+  height: 80px;
+  position: relative;
+  top: 10px;
+  left: 10px;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+.keep {
+  background-image: url('https://www.gstatic.com/images/branding/product/2x/keep_2020q4_48dp.png');
+  width: 84px;
+  height: 64px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 64px 64px;
+  position: relative;
+  top: -10px;
+  left: -10px;
+  transform: scale(calc(5/6));
+}
+
+.keep.keep-app {
+  border: none;
+  margin-left: 120px;
+}
+
+.keep-app:hover {
+  cursor: auto;
+}
+
+.keep-title {
+  position: relative;
+  left: 15px;
+  top: -15px;
+}
+
+.keep-container:hover {
+  background-color: #2962ff20;
+  cursor: pointer;
+}
+
+.mail-container {
+  padding: 10px;
+  width: 85px;
+  height: 80px;
+  position: relative;
+  top: -70px;
+  left: 100px;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+.mail {
+  background-image: url('https://ssl.gstatic.com/gb/images/p2_8f3487b5.png');
+  background-position: 0 -1104px;
+  background-size: 64px 3169px;
+  height: 64px;
+  vertical-align: top;
+  width: 64px;
+  position: relative;
+  top: -10px;
+  left: 0;
+  /* transform: scale(calc(5/6)); */
+}
+
+.mail-title {
+  position: relative;
+  left: 18px;
+  top: -15px;
+}
+
+.mail-container:hover {
+  background-color: #2962ff20;
+  cursor: pointer;
+}
+
+.home-container {
+  padding: 10px;
+  width: 85px;
+  height: 80px;
+  position: relative;
+  top: -150px;
+  left: 190px;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+
+.home-container .home {
+  background-image: url('https://lh3.googleusercontent.com/zGSQ3CkZCuntNXuuiLsvHnljLEmpJD6MKKWjzuL20jMovKj8akWzk6gb0zmXZTMH6ORoD_I5UMOVT4JRUKYwA2S4ki7MQbyZ0rUIZw=h120');
+  width: 84px;
+  height: 64px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 64px 64px;
+  position: relative;
+  transform: scale(calc(5/6));
+  right: 10px;
+  top: -7px;
+
+}
+
+.home-title {
+  position: relative;
+  right: -14px;
+  top: -17px;
+}
+
+.home-container:hover {
+  background-color: #2962ff20;
+  cursor: pointer;
+}
+
+.about-container {
+  padding: 10px;
+  width: 85px;
+  height: 80px;
+  position: relative;
+  top: -150px;
+  left: 10px;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+.about-container .about {
+  background-image: url('https://img.icons8.com/color/48/000000/about.png');
+  width: 84px;
+  height: 64px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 64px 64px;
+  position: relative;
+  transform: scale(calc(5/6));
+  right: 10px;
+  top: -7px;
+
+}
+
+.about-title {
+  position: relative;
+  right: -14px;
+  top: -17px;
+}
+
+.about-container:hover {
+  background-color: #2962ff20;
+  cursor: pointer;
 }

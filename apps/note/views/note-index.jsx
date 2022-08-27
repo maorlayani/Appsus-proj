@@ -7,7 +7,9 @@ import { noteService } from '../services/note.service.js'
 
 export class NoteIndex extends React.Component {
     state = {
-        notes: null
+        notes: null,
+        pinnedNotes: [],
+        unPinnedNotes: []
     }
 
     componentDidMount() {
@@ -16,36 +18,91 @@ export class NoteIndex extends React.Component {
 
     loadNotes = () => {
         noteService.query()
-            .then((notes) => this.setState({ notes }))
+            .then((notes) => {
+                // let { pinnedNotes, unPinnedNotes } = this.state
+                // pinnedNotes = notes.filter(note => (note.isPinned))
+                // unPinnedNotes = notes.filter(note => (!note.isPinned))
+                this.setState({ notes }, this.filterNotesByPinned)
+            })
     }
 
-    onAddNote = (txt, noteType) => {
-        console.log('in index txt', txt)
-        console.log('in index noteType', noteType)
-        noteService.addNote(txt, noteType)
+    onAddNote = (noteTitle, noteTxt, noteType) => {
+        noteService.addNote(noteTitle, noteTxt, noteType)
             .then((note) => {
-                this.setState(({ notes }) => ({ notes: [note, ...notes] }))
+                this.setState(({ notes }) => ({ notes: [note, ...notes] }), this.filterNotesByPinned)
+            })
+    }
+
+    onUpdetaNote = (title, txt, note) => {
+        // if (!title && !txt) return
+        if (note.info.todos) return
+        let { notes } = this.state
+        // console.log('title from INDEX', title)
+        // console.log('txt from INDEX', txt)
+        noteService.updateNote(title, txt, note)
+            .then((updatedNote) => {
+                notes = notes.map(note => note.id === updatedNote.id ? updatedNote : note)
+                this.setState({ notes }, this.filterNotesByPinned)
+            })
+    }
+
+    onUpdateTodoNote = (note) => {
+        let { notes } = this.state
+        noteService.updateNoteTodo(note)
+            .then((updatedNote) => {
+                notes = notes.map(note => note.id === updatedNote.id ? updatedNote : note)
+                this.setState({ notes }, this.filterNotesByPinned)
             })
     }
 
     onDeleteNote = (noteId) => {
-        // console.log('delete me!', noteId)
         let { notes } = this.state
         noteService.deleteNote(noteId)
             .then(() => {
                 notes = notes.filter(note => note.id !== noteId)
-                this.setState({ notes })
+                this.setState({ notes }, this.filterNotesByPinned)
             })
     }
 
+    onCopyNote = (ev, copiedNote) => {
+        ev.stopPropagation()
+        let { notes } = this.state
+        noteService.copyNote(copiedNote)
+            .then((note) => {
+                notes.unshift(note)
+                this.setState({ notes }, this.filterNotesByPinned)
+            })
+    }
+
+    onSortNotesByPinned = (note) => {
+        noteService.updateNoteTodo(note)
+            .then(() => {
+                this.loadNotes()
+            })
+    }
+
+    filterNotesByPinned = () => {
+        let { pinnedNotes, unPinnedNotes, notes } = this.state
+        pinnedNotes = notes.filter(note => (note.isPinned))
+        unPinnedNotes = notes.filter(note => (!note.isPinned))
+        this.setState({ pinnedNotes, unPinnedNotes })
+    }
+
     render() {
-        const { notes } = this.state
-        const { onAddNote, onDeleteNote } = this
+        const { notes, pinnedNotes, unPinnedNotes } = this.state
+        const { onAddNote, onDeleteNote, onUpdetaNote, onUpdateTodoNote, onCopyNote, onSortNotesByPinned } = this
         if (!notes) return <h2>Loading...</h2>
         return (
             <div className="note-index flex column align-center">
                 <NoteCompose onAddNote={onAddNote} />
-                <NoteList notes={notes} onDeleteNote={onDeleteNote} />
+                <NoteList notes={notes}
+                    onDeleteNote={onDeleteNote}
+                    onUpdetaNote={onUpdetaNote}
+                    onUpdateTodoNote={onUpdateTodoNote}
+                    onCopyNote={onCopyNote}
+                    onSortNotesByPinned={onSortNotesByPinned}
+                    pinnedNotes={pinnedNotes}
+                    unPinnedNotes={unPinnedNotes} />
                 {/* <NoteFilter />
                 <NoteFolderList />
                 */}
