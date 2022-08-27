@@ -7,7 +7,6 @@ export class NoteTodos extends React.Component {
         todoValues: {},
         todoLabelValue: this.props.note.info.label,
         isMouseHover: false
-
     }
 
     componentDidMount() {
@@ -39,7 +38,6 @@ export class NoteTodos extends React.Component {
         let { todos } = this.state
         let { note } = this.props
         todos = todos.filter(todo => todo.id !== todoId)
-        // console.log(todos)
         this.setState({ todos }, () => {
             note.info.todos = this.state.todos
             this.props.onUpdateTodoNote(note)
@@ -49,14 +47,6 @@ export class NoteTodos extends React.Component {
     onLableClick = (ev) => {
         if (!this.props.isOnDetailsDisplay) ev.preventDefault()
     }
-
-    // sortTodos = (todos) => {
-    //     todos.sort((a, b) => {
-    //         if (a.doneAt) return 1
-    //         else return -1
-    //     })
-    //     return todos
-    // }
 
     changeHandler = ({ target }, updtaedTodo) => {
         const field = target.name
@@ -92,7 +82,6 @@ export class NoteTodos extends React.Component {
         })
     }
 
-
     render() {
         const { isOnDetailsDisplay, note } = this.props
         const { info } = this.props.note
@@ -100,8 +89,6 @@ export class NoteTodos extends React.Component {
         const { onLableClick, onCheckboxClick, changeHandler, changeHandler1, onDeleteTodo, changeHandlerLabel } = this
 
         return <div className="note-todos">
-            {/* < h4 > {info.label}</h4 > */}
-            {/* {!isOnDetailsDisplay && <h4>{info.label}</h4>} */}
             {!isOnDetailsDisplay && <LongTxt title={info.label} />}
             {isOnDetailsDisplay && <input
                 type="text"
@@ -112,7 +99,7 @@ export class NoteTodos extends React.Component {
                 style={{ backgroundColor: note.style.backgroundColor }}
             ></input>}
             {
-                info.todos.map((todo, idx) => {
+                info.todos.map((todo) => {
                     return <div
                         key={todo.id}
                         className={'note-todo-container flex ' + (isOnDetailsDisplay ? 'display-Details' : '')}>
@@ -123,12 +110,10 @@ export class NoteTodos extends React.Component {
                             style={{ accentColor: note.style.backgroundColor }}
                             onClick={(ev) => onCheckboxClick(ev, todo)}
                             checked={(todo.doneAt ? true : false)}
-                            onChange={changeHandler1}
-                        />
+                            onChange={changeHandler1} />
                         {!isOnDetailsDisplay && <label
                             className={'todo-label ' + (todo.doneAt ? 'is-done' : '')}
                             htmlFor={todo.txt}
-                            // onClick={onLableClick} >{todo.txt}
                             onClick={onLableClick} ><LongTxt txt={todo.txt} isTodo={true} />
                         </label>}
                         {isOnDetailsDisplay && <input
@@ -146,5 +131,4 @@ export class NoteTodos extends React.Component {
             }
         </div >
     }
-
 }

@@ -18,7 +18,7 @@
         left: 50px;
     }
 
-    img {
+    .note-img img {
         height: 200px;
         text-align: center;
     }
@@ -35,6 +35,17 @@
     .note-list {
         position: relative;
         top: 100px;
+    }
+
+    .app-header .header-logo {
+        left: 10px !important;
+        width: 100%;
+    }
+
+    .drop-down {
+        position: relative;
+        left: 150px;
+        margin-left: 10px !important;
     }
 }
 
@@ -72,7 +83,6 @@
     .btn-compose-add-note {
         left: 440px !important;
     }
-
 }
 
 /* LARGE */
@@ -83,5 +93,4 @@
         max-width: 1000px;
         margin: auto;
     }
-
 }

@@ -4,7 +4,6 @@ export class NoteList extends React.Component {
 
     render() {
         const { notes, onDeleteNote, onUpdetaNote, onUpdateTodoNote, onCopyNote, onSortNotesByPinned, pinnedNotes, unPinnedNotes } = this.props
-        // console.log(pinnedNotes)
         return <section className="note-list note-main-layout">
             {pinnedNotes[0] && <div className="notes-list-title">PINNED</div>}
             <div className="note-list-container">

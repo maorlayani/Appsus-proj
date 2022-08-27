@@ -29,6 +29,4 @@ export class LongTxt extends React.Component {
             }
         }
     }
-
-
 }

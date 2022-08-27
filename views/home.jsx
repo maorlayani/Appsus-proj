@@ -4,6 +4,7 @@ export class Home extends React.Component {
         let goTo = Math.random() > 0.5 ? 'note' : 'mail'
         this.props.history.push(`/${goTo}`)
     }
+
     render() {
 
         return <section className="home-page flex column align-center">
@@ -11,5 +12,4 @@ export class Home extends React.Component {
             <button className="home-btn" onClick={this.onStart}>START EXPLORING</button>
         </section>
     }
-
 }

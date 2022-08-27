@@ -5,17 +5,18 @@ header {
   color: #202124;
   border-bottom: 1px solid rgb(60 64 67 / 30%);
   font-family: Roboto-Regular, Arial, sans-serif;
-
 }
 
 .app-header {
   display: flex;
   justify-content: space-between;
   padding: 20px 0;
+  gap: 100px
 }
 
-.app-header h3 {
-  margin-left: 100px;
+.app-header .header-logo {
+  position: relative;
+  left: 100px;
 }
 
 .drop-down {
@@ -71,7 +72,6 @@ header {
   border-radius: 8px;
   font-size: 15px;
   color: #202124;
-
 }
 
 .keep {
@@ -166,7 +166,6 @@ header {
   font-size: 15px;
 }
 
-
 .home-container .home {
   background-image: url('https://lh3.googleusercontent.com/zGSQ3CkZCuntNXuuiLsvHnljLEmpJD6MKKWjzuL20jMovKj8akWzk6gb0zmXZTMH6ORoD_I5UMOVT4JRUKYwA2S4ki7MQbyZ0rUIZw=h120');
   width: 84px;
@@ -178,7 +177,6 @@ header {
   transform: scale(calc(5/6));
   right: 10px;
   top: -7px;
-
 }
 
 .home-title {
@@ -214,7 +212,6 @@ header {
   transform: scale(calc(5/6));
   right: 10px;
   top: -7px;
-
 }
 
 .about-title {

@@ -25,7 +25,6 @@ export class NoteImg extends React.Component {
 
         return <div className="note-img">
             <img src={note.info.url} />
-            {/* {!isOnDetailsDisplay && <h4>{note.info.title}</h4>} */}
             {!isOnDetailsDisplay && <LongTxt title={note.info.title} />}
             {isOnDetailsDisplay && <input
                 type="text"
@@ -37,6 +36,5 @@ export class NoteImg extends React.Component {
             ></input>}
         </div>
     }
-
 }
 

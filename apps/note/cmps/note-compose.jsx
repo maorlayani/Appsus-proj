@@ -13,7 +13,6 @@ export class NoteCompose extends React.Component {
     }
 
     isInputOnFocus = () => {
-        // this.setState(({ isOnFocus }) => ({ isOnFocus: !isOnFocus }))
         this.setState(({ isOnFocus: true }), () => {
             this.setTxtInputPlaceholder()
             this.noteTxtInputRef.current.focus()
@@ -30,7 +29,6 @@ export class NoteCompose extends React.Component {
         ev.preventDefault()
         this.setState({ isOnFocus: false })
         const { noteTitle, noteTxt, noteType } = this.state
-        // console.log('on submit', noteTxt)
         this.props.onAddNote(noteTitle, noteTxt, noteType)
         this.setState(({
             noteType: null,
@@ -41,17 +39,13 @@ export class NoteCompose extends React.Component {
     }
 
     onAddNoteImg = (ev) => {
-        // ev.stopPropagation()
         this.setState(({ isNoteImg }) => ({ isNoteImg: !isNoteImg }), () => {
-            // this.setTxtInputPlaceholder()
-
         })
     }
 
     onInputFocus = () => {
         if (!this.state.noteType) this.onSetNoteType('txt')
         this.setState({ isOnFocus: true })
-        // else return
     }
 
     onSetNoteType = (type) => {
@@ -83,7 +77,6 @@ export class NoteCompose extends React.Component {
     render() {
         const { isOnFocus, noteTxt, inputPlaceholder, noteType, noteTitle } = this.state
         const { isInputOnFocus, onInputFocus, changeHandler, onSubmitNote, onSetNoteType, noteTxtInputRef } = this
-        // console.log('isOnFocus', isOnFocus)
         return <section className="note-compose">
 
             <div className="note-compose-container flex align-center" >

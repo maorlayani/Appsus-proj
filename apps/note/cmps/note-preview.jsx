@@ -17,7 +17,6 @@ export class NotePreview extends React.Component {
     }
 
     setOnDetailsDisplay = (isOn) => {
-        // console.log(isOn)
         this.setState(({ isOnDetailsDisplay: isOn }))
     }
 
@@ -50,7 +49,6 @@ export class NotePreview extends React.Component {
                 onUpdateTodoNote={onUpdateTodoNote}
                 onCopyNote={onCopyNote}
                 onSortNotesByPinned={onSortNotesByPinned}
-
             />}
         </section >
     }

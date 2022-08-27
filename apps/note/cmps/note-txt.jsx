@@ -6,18 +6,11 @@ export class NoteTxt extends React.Component {
         TitleValue: this.props.note.info.title
     }
 
-    componentDidMount() {
-        // if (!this.props.updateNoteTxtVal) return
-        // this.props.updateNoteTxtVal(this.state.textAreaValue)
-    }
-
     noteTxtChangeHandler = ({ target }) => {
         const field = target.name
         const value = target.value
         this.setState({ [field]: value }, () => {
             const { TitleValue, textAreaValue } = this.state
-            // console.log('txt from TXT-COM', textAreaValue)
-            // console.log('txt from TITLE-COM', TitleValue)
             this.props.updateNoteTxtVal(TitleValue, textAreaValue)
         })
     }
@@ -28,7 +21,6 @@ export class NoteTxt extends React.Component {
         const { noteTxtChangeHandler } = this
 
         return <div className="note-txt">
-            {/* {!isOnDetailsDisplay && <h4>{note.info.title}</h4>} */}
             {!isOnDetailsDisplay && <LongTxt title={note.info.title} />}
             {isOnDetailsDisplay && <input
                 type="text"
@@ -38,7 +30,6 @@ export class NoteTxt extends React.Component {
                 onChange={noteTxtChangeHandler}
                 style={{ backgroundColor: note.style.backgroundColor }}
             ></input>}
-            {/* {!isOnDetailsDisplay && <p>{note.info.txt}</p>} */}
             {!isOnDetailsDisplay && <p className={(!note.info.title ? 'add-pad' : '')}><LongTxt txt={note.info.txt} /></p>}
             {isOnDetailsDisplay && <textarea
                 type="textarea"
@@ -50,7 +41,6 @@ export class NoteTxt extends React.Component {
                 style={{ backgroundColor: note.style.backgroundColor }} />}
         </div>
     }
-
 }
 
 

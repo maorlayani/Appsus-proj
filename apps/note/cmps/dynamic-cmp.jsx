@@ -14,5 +14,4 @@ export function DynamicCmp(props) {
         case 'note-todo':
             return <NoteTodos  {...props} />
     }
-
 }
