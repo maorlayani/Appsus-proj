@@ -148,7 +148,7 @@ function _demoData() {
             type: "note-todo",
             isPinned: false,
             info: {
-                label: "Get my stuff together",
+                title: "Get my stuff together",
                 todos: [
                     { txt: "Driving liscence", doneAt: null, id: utilService.makeId() },
                     { txt: "Coding power", doneAt: null, id: utilService.makeId() },

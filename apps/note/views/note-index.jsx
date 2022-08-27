@@ -35,6 +35,7 @@ export class NoteIndex extends React.Component {
 
     onUpdetaNote = (title, txt, note) => {
         // if (!title && !txt) return
+        if (note.info.todos) return
         let { notes } = this.state
         noteService.updateNote(title, txt, note)
             .then((updatedNote) => {

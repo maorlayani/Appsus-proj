@@ -1,3 +1,5 @@
+const { Link } = ReactRouterDOM
+
 export class NoteToolBar extends React.Component {
     state = {
         isShowColorDropdown: false
@@ -30,6 +32,7 @@ export class NoteToolBar extends React.Component {
 
     onToEmail = (ev, note) => {
         ev.stopPropagation()
+        // console.log('email')
     }
 
     render() {
@@ -44,7 +47,7 @@ export class NoteToolBar extends React.Component {
             <button className="btn-note-toolbar btn-color-picker" onClick={(ev) => showColorDropDown(ev)}></button>
             <button className="btn-note-toolbar btn-copy" onClick={(ev) => onCopyNote(ev, note)}></button>
             <button className={"btn-note-toolbar btn-pin " + (note.isPinned ? 'full' : 'empty')} onClick={(ev) => onTogglePinned(ev, note)}></button>
-            <button className="btn-note-toolbar btn-email" onClick={(ev) => onToEmail(ev, note)}></button>
+            <Link to={`/mail/note=title=${note.info.title}&txt=${note.info.txt}`}>  <button className="btn-note-toolbar btn-email" onClick={(ev) => onToEmail(ev, note)}></button></Link>
             {isOnDetailsDisplay && <button className="btn-note-toolbar btn-close" onClick={(ev) => onCloseNote(ev, note)}>Close</button>}
 
             <div className={'toolbar-color-container flex ' + (isShowColorDropdown ? 'show' : '')}>
@@ -57,7 +60,7 @@ export class NoteToolBar extends React.Component {
                 })}
             </div>
 
-        </section>
+        </section >
     }
 
 }

@@ -1,6 +1,6 @@
 const { Link, NavLink, withRouter } = ReactRouterDOM
 
-export class AppHeader extends React.Component {
+class _AppHeader extends React.Component {
   state = {
     isShowHeaderDropdown: false
   }
@@ -10,12 +10,16 @@ export class AppHeader extends React.Component {
   }
 
   render() {
+    // console.log(this.props)
     const { isShowHeaderDropdown } = this.state
     const { showHeaderDropDown } = this
+    const { location } = this.props
+    // console.log(location)
     return (
       <header className="app-header">
-        <Link to="/">
-          <h3>APPSUS</h3>
+        <Link to={"/" + (location.pathname === '/note' ? 'note' : '')}>
+          {location.pathname !== '/note' && <h3>APPSUS</h3>}
+          {location.pathname === '/note' && <div className="keep keep-app"></div>}
         </Link>
         <nav>
           <div className="drop-down" onClick={showHeaderDropDown}></div>
@@ -49,5 +53,6 @@ export class AppHeader extends React.Component {
       </header>
     )
   }
-
 }
+
+export const AppHeader = withRouter(_AppHeader)

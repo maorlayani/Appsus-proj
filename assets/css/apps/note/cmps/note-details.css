@@ -29,8 +29,9 @@
 
 
 .focus img {
-    max-width: 630px;
+    /* max-width: 630px; */
     max-height: 440px;
+    /* height: 100%; */
 }
 
 /* width */

@@ -3,8 +3,8 @@ import { NoteToolBar } from "./note-tool-bar.jsx";
 
 export class NoteDetails extends React.Component {
     state = {
-        updatedTxtnoteVal: '',
-        updatedTxtnoteTitle: '',
+        updatedTxtnoteVal: this.props.note.info.title,
+        updatedTxtnoteTitle: this.props.note.info.txt,
         updatedTodoNote: ''
     }
 

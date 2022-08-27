@@ -5,8 +5,8 @@ export class NoteTxt extends React.Component {
     }
 
     componentDidMount() {
-        if (!this.props.updateNoteTxtVal) return
-        this.props.updateNoteTxtVal(this.state.textAreaValue)
+        // if (!this.props.updateNoteTxtVal) return
+        // this.props.updateNoteTxtVal(this.state.textAreaValue)
     }
 
     noteTxtChangeHandler = ({ target }) => {
@@ -14,12 +14,10 @@ export class NoteTxt extends React.Component {
         const value = target.value
         this.setState({ [field]: value }, () => {
             const { TitleValue, textAreaValue } = this.state
+            console.log('txt from TXT-COM', textAreaValue)
+            console.log('txt from TITLE-COM', TitleValue)
             this.props.updateNoteTxtVal(TitleValue, textAreaValue)
         })
-        // const { value } = target
-        // this.setState(({ textAreaValue: value }), () => {
-        //     this.props.updateNoteTxtVal(this.state.textAreaValue)
-        // })
     }
 
     render() {
