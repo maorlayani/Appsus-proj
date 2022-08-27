@@ -1,13 +1,28 @@
 .mail-app {
   background-color: whitesmoke;
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
 }
 
+.mail-app header {
+  background-color: whitesmoke;
+  border: none;
+}
+
+.mail-app aside {
+  /* background-color: aqua; */
+  float: left;
+  width: 20%;
+  height: 100%;
+}
+
 .mail-app .main-content-app {
-  width: 1000px;
-  height: 90%;
+  /* background-color: aquamarine; */
+  float: left;
+  width: 80%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
