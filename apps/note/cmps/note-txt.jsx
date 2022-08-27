@@ -14,8 +14,8 @@ export class NoteTxt extends React.Component {
         const value = target.value
         this.setState({ [field]: value }, () => {
             const { TitleValue, textAreaValue } = this.state
-            console.log('txt from TXT-COM', textAreaValue)
-            console.log('txt from TITLE-COM', TitleValue)
+            // console.log('txt from TXT-COM', textAreaValue)
+            // console.log('txt from TITLE-COM', TitleValue)
             this.props.updateNoteTxtVal(TitleValue, textAreaValue)
         })
     }

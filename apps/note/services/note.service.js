@@ -148,7 +148,7 @@ function _demoData() {
             type: "note-todo",
             isPinned: false,
             info: {
-                title: "Get my stuff together",
+                label: "Get my stuff together",
                 todos: [
                     { txt: "Driving liscence", doneAt: null, id: utilService.makeId() },
                     { txt: "Coding power", doneAt: null, id: utilService.makeId() },
@@ -283,6 +283,7 @@ function updateNote(title, txt, note) {
 function updateNoteTxt(title, txt, noteToUpdate) {
     noteToUpdate.info.txt = txt
     noteToUpdate.info.title = title
+    // console.log('from first func on service', title)
     let notes = storageService.loadFromStorage(STORAGE_KEY)
     notes = notes.map(note => note.id === noteToUpdate.id ? noteToUpdate : note)
     storageService.saveToStorage(STORAGE_KEY, notes)

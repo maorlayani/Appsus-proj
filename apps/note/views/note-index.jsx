@@ -37,6 +37,8 @@ export class NoteIndex extends React.Component {
         // if (!title && !txt) return
         if (note.info.todos) return
         let { notes } = this.state
+        // console.log('title from INDEX', title)
+        // console.log('txt from INDEX', txt)
         noteService.updateNote(title, txt, note)
             .then((updatedNote) => {
                 notes = notes.map(note => note.id === updatedNote.id ? updatedNote : note)
