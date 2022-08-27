@@ -10,15 +10,33 @@
 .mail-folder-list ul li {
   display: flex;
   width: 100%;
+  height: 3em;
   justify-content: space-between;
   align-items: center;
+  margin: 10px;
 }
 .mail-folder-list ul li span {
   margin: 20px;
 }
 
-.mail-folder-list ul li.compose {
-  background-color: skyblue;
-  /* padding: 10px; */
+/* mail-folder ${type} clicked */
+.mail-folder-list ul li.mail-folder.clicked {
+  width: 12em;
   border-radius: 1em;
+
+  background-color: skyblue;
+}
+
+.mail-folder-list ul li.mail-folder.compose {
+  background-color: rgb(181, 223, 240);
+  /* padding: 10px; */
+  width: 12em;
+  border-radius: 1em;
+}
+
+.mail-folder-list ul li.mail-folder:hover {
+  width: 12em;
+  border-radius: 1em;
+  cursor: pointer;
+  background-color: rgb(187, 197, 201);
 }

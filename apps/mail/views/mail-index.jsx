@@ -1,3 +1,4 @@
+const Router = ReactRouterDOM.HashRouter
 const { Route, Link } = ReactRouterDOM
 
 import { MailFilter } from '../cmps/mail-filter.jsx'
@@ -15,6 +16,7 @@ export class MailIndex extends React.Component {
   state = {
     mails: [],
     sentMails: [],
+    trashMails: [],
     filterBy: {
       subject: '',
       selected: '',
@@ -32,18 +34,10 @@ export class MailIndex extends React.Component {
   componentDidMount() {
     this.loadMails()
     this.onSentMails()
+    console.log('this.props:', this.props)
   }
 
-  // DynamicCmp = (props) => {
-  //   console.log('props:', props)
-  //   switch (this.state.currView) {
-  //     case 'hello':
-  //       return <MailSent {...props} />
-
-  //     case 'mailCompose':
-  //       return <MailList {...props} />
-  //   }
-  // }
+  inputRef = React.createRef()
 
   loadMails = () => {
     mailService
@@ -62,10 +56,6 @@ export class MailIndex extends React.Component {
   }
 
   onSetFilterByAside = (field, value) => {
-    // console.log('this.state.filterBy:', this.state.filterBy)
-    // console.log('onSetFilterByAside:', field)
-    // console.log('onSetFilterByAside:', value)
-
     this.setState(
       (prevState) => ({
         filterBy: {
@@ -74,8 +64,7 @@ export class MailIndex extends React.Component {
         },
       }),
       () => {
-        this.loadMails
-        // console.log('this.state.filterBy:', this.state.filterBy)
+        this.loadMails()
       }
     )
   }
@@ -103,14 +92,34 @@ export class MailIndex extends React.Component {
     ev.stopPropagation()
     console.log('mailId:', mailId)
     mailService.remove(mailId).then(() => {
+      const trashMails = this.state.trashMails.filter(
+        (mail) => mail.id !== mailId
+      )
+      this.setState({ trashMails, selectedMail: null })
+    })
+  }
+
+  onMoveTrashMail = (ev, mailId) => {
+    console.log('ev:', ev)
+    ev.stopPropagation()
+    console.log('mailId:', mailId)
+    mailService.moveToTrash(mailId).then(() => {
       const mails = this.state.mails.filter((mail) => mail.id !== mailId)
       this.setState({ mails, selectedMail: null })
     })
   }
 
+  onTrashMails = () => {
+    console.log('helllooo 0from 0Trash!!!')
+    mailService
+      .getTrashMail()
+      .then((trashMails) => this.setState({ trashMails }))
+  }
+
   onCompose = () => {
     const toggle = !this.state.isCompose
     this.setState({ isCompose: toggle })
+    // this.inputRef.current.focus()
   }
 
   onSentMails = () => {
@@ -118,9 +127,28 @@ export class MailIndex extends React.Component {
     mailService.getSentMails().then((sentMails) => this.setState({ sentMails }))
   }
 
+  getTypeMails = () => {
+    const { sent, trash } = this.state.filterBy
+    const { mails, sentMails, trashMails } = this.state
+    if (sent) return sentMails
+    if (trash) return trashMails
+    return mails
+  }
+
+  doRenderList = () => {
+    const { selectedMail, isCompose } = this.state
+    const res = !selectedMail || !isCompose ? true : false
+    console.log('res:', res)
+    return res
+  }
+
   render() {
     const { mails, selectedMail, isCompose, sentMails } = this.state
-    console.log('sentMails:', sentMails)
+    const { sent, trash } = this.state.filterBy
+    const { match } = this.props
+    console.log('isCompose', isCompose)
+    console.log('selectedMail', selectedMail)
+    console.log('trash:', trash)
     const {
       onSetFilterBySearch,
       onSetFilterBySelect,
@@ -130,16 +158,28 @@ export class MailIndex extends React.Component {
       onCompose,
       DynamicCmp,
       onSetFilterByAside,
+      onSentMails,
+      onMoveTrashMail,
+      onTrashMails,
+      getTypeMails,
+      inputRef,
+      doRenderList,
     } = this
     return (
       <section className="mail-app">
         <header className="mail-app-header">
-          <div className="mail-logo">mail</div>
+          <div
+            className="mail-logo"
+            onClick={() => {
+              this.props.history.push('/mail')
+            }}
+          >
+            mail
+          </div>
           <MailFilter
             onSetFilterBySearch={onSetFilterBySearch}
             onSetFilterBySelect={onSetFilterBySelect}
           />
-          <MailTopNavbar />
         </header>
 
         <aside className="mail-app-aside-filter">
@@ -147,36 +187,53 @@ export class MailIndex extends React.Component {
             mails={mails}
             onCompose={onCompose}
             onSetFilterByAside={onSetFilterByAside}
+            onSentMails={onSentMails}
+            onTrashMails={onTrashMails}
           />
         </aside>
 
-        <section className="main-content-app">
-          {!selectedMail && (
-            <MailList
-              mails={mails}
-              onSelectMail={onSelectMail}
-              onToggleBtn={onToggleBtn}
-              onRemoveMail={onRemoveMail}
-            />
-          )}
+        <Router>
+          <section className="main-content-app">
+            <Route path="/mail/details/:mailId" component={MailDetails} />
+            <Route path="/mail/compose" component={MailCompose} />
+            {/* <Route path="/mail/details/:mailId"> 
+              <MailDetails />
+            </Route> */}
 
-          {selectedMail && (
+            {/* <Route exact path="/mail">
+              <MailList
+                mails={getTypeMails()}
+                trash={trash}
+                onSelectMail={onSelectMail}
+                onToggleBtn={onToggleBtn}
+                onRemoveMail={onRemoveMail}
+                onMoveTrashMail={onMoveTrashMail}
+              />
+            </Route> */}
+
+            {{ doRenderList } && (
+              <MailList
+                mails={getTypeMails()}
+                trash={trash}
+                onSelectMail={onSelectMail}
+                onToggleBtn={onToggleBtn}
+                onRemoveMail={onRemoveMail}
+                onMoveTrashMail={onMoveTrashMail}
+              />
+            )}
+
+            {/* {selectedMail && (
             <MailDetails
               mail={selectedMail}
               onGoBack={() => onSelectMail()}
               onRemoveMail={onRemoveMail}
             />
-          )}
-          {isCompose && <MailCompose onCompose={onCompose} />}
-          {isCompose && <MailTrash onCompose={onCompose} />}
-          {isCompose && <MailSent sentMails={sentMails} />}
-          {/* <DynamicCmp
-            mails={mails}
-            onSelectMail={onSelectMail}
-            onToggleBtn={onToggleBtn}
-            onRemoveMail={onRemoveMail}
-          /> */}
-        </section>
+          )} */}
+            {/* {isCompose && (
+              <MailCompose onCompose={onCompose} inputRef={inputRef} />
+            )} */}
+          </section>
+        </Router>
       </section>
     )
   }

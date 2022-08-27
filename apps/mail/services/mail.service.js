@@ -11,10 +11,13 @@ export const mailService = {
   getSubjects,
   sentMail,
   getSentMails,
+  moveToTrash,
+  getTrashMail,
 }
 
 const KEY = 'emailDB'
 const KEY_SENT_MAIL = 'sentMailDB'
+const KEY_MAIL_TRASH = 'trashMailDB'
 
 var gSubjects = ['All', 'Financial', 'Shoping', 'Study', 'Sport', 'Vacation']
 var gSentBy = ['Wolt', 'Dropbox', 'AliExpress', 'Tel-Aviv', 'Nir-Aviv', 'Lime']
@@ -28,19 +31,37 @@ function query(filterBy) {
 
   console.log('emails:', emails)
   if (filterBy) {
-    let { subject, selected } = filterBy
-    console.log('{ subject, selected }:', { subject, selected })
+    let { subject, selected, starred, important, inbox } = filterBy
+    console.log('{ subject, selected }:', {
+      subject,
+      selected,
+      starred,
+      important,
+      inbox,
+    })
+    if (inbox) {
+      return Promise.resolve(emails)
+    }
     if (!subject) subject = 'All'
     if (!selected) selected = 'All'
     console.log('{ subject, selected }:', { subject, selected })
 
     emails = emails.filter((email) => {
-      // console.log('email:', email)
-      // console.log(`${subject}`)
-      // console.log('email.subject:', email.subject)
-
       return email.subject.includes(subject) || email.sentBy.includes(subject)
     })
+
+    if (starred && important) {
+      emails = emails.filter((email) => {
+        return email.starred || email.important
+      })
+    } else {
+      if (starred) {
+        emails = emails.filter((email) => email.starred)
+      }
+      if (important) {
+        emails = emails.filter((email) => email.important)
+      }
+    }
   }
   console.log('emails:', emails)
 
@@ -48,6 +69,7 @@ function query(filterBy) {
 }
 
 function getById(emailId) {
+  console.log('emailIdgetById:', emailId)
   if (!emailId) return Promise.resolve(null)
   const emails = _loadFromStorage(KEY)
   const email = emails.find((email) => emailId === email.id)
@@ -63,9 +85,9 @@ function getNextEmailId(emailId) {
 
 function remove(emailId) {
   // return Promise.reject('Not now!!!')
-  let emails = _loadFromStorage(KEY)
+  let emails = _loadFromStorage(KEY_MAIL_TRASH)
   emails = emails.filter((email) => email.id !== emailId)
-  _saveToStorage(KEY, emails)
+  _saveToStorage(KEY_MAIL_TRASH, emails)
   return Promise.resolve()
 }
 
@@ -110,7 +132,7 @@ function _createEmail(
   subject = _getRandLabelMail('subject'),
   body = utilService.makeLorem(40),
   sentBy = _getRandLabelMail('sentBy'),
-  isSent = false
+  sent = false
 ) {
   return {
     id: utilService.makeId(),
@@ -121,9 +143,9 @@ function _createEmail(
     to: 'momo@momo.com',
     sentBy,
     isCheck: false,
-    isImportant: false,
-    isStarred: false,
-    isSent,
+    important: false,
+    starred: false,
+    sent,
   }
 }
 
@@ -154,6 +176,44 @@ function sentMail(mail) {
   const savaMail = _createEmail(subject, body, sentBy, true)
   emails.unshift(savaMail)
   _saveToStorage(KEY_SENT_MAIL, emails)
+}
+
+function getSentMails() {
+  let emails = _loadFromStorage(KEY_SENT_MAIL)
+  console.log('emails:', emails)
+  return Promise.resolve(emails)
+}
+
+function moveToTrash(emailId) {
+  let emails = _loadFromStorage(KEY)
+  const email = emails.find((email) => email.id === emailId)
+  console.log('email:', email)
+  saveMailInTrash(email)
+
+  emails = emails.filter((email) => email.id !== emailId)
+  _saveToStorage(KEY, emails)
+  return Promise.resolve()
+}
+
+function saveMailInTrash(email) {
+  console.log('saveMailInTrash')
+  let emails = _loadFromStorage(KEY_MAIL_TRASH)
+  console.log('emails:', emails)
+  if (!emails || emails.length === 0) {
+    emails = []
+    emails[0] = email
+  } else {
+    emails.unshift(email)
+  }
+  console.log('emails:', emails)
+  _saveToStorage(KEY_MAIL_TRASH, emails)
+}
+
+function getTrashMail() {
+  console.log('getTrashMail')
+  let emails = _loadFromStorage(KEY_MAIL_TRASH)
+  console.log('emails:', emails)
+  return Promise.resolve(emails)
 }
 
 function getSentMails() {

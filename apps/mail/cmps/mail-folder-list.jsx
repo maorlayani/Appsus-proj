@@ -1,3 +1,4 @@
+const { Link } = ReactRouterDOM
 export class MailFolderList extends React.Component {
   state = {
     filterBy: {
@@ -15,6 +16,12 @@ export class MailFolderList extends React.Component {
 
   toggleFilter = (field) => {
     console.log('{field}:', field)
+    if (field === 'sent') {
+      this.props.onSentMails()
+    }
+    if (field === 'trash') {
+      this.props.onTrashMails()
+    }
     this.setState(
       (prevState) => ({
         filterBy: {
@@ -29,6 +36,14 @@ export class MailFolderList extends React.Component {
     )
   }
 
+  getClassName = (type) => {
+    const item = this.state.filterBy[type]
+    const classNameItem = item
+      ? `mail-folder ${type} clicked`
+      : `mail-folder ${type} `
+    return classNameItem
+  }
+
   render() {
     console.log('this.props:', this.props)
     const { mails, onCompose } = this.props
@@ -40,7 +55,19 @@ export class MailFolderList extends React.Component {
     return (
       <section className="mail-folder-list">
         <ul>
-          <li
+          <Link to={'/mail/compose'}>
+            <li
+              className="mail-folder compose"
+              onClick={() => {
+                onCompose()
+              }}
+            >
+              <span></span>
+              <span>Compose</span>
+              <span></span>
+            </li>
+          </Link>
+          {/* <li
             className="mail-folder compose"
             onClick={() => {
               onCompose()
@@ -49,9 +76,9 @@ export class MailFolderList extends React.Component {
             <span></span>
             <span>Compose</span>
             <span></span>
-          </li>
+          </li> */}
           <li
-            className="mail-folder inbox"
+            className={this.getClassName('inbox')}
             onClick={() => {
               toggleFilter('inbox')
             }}
@@ -63,6 +90,7 @@ export class MailFolderList extends React.Component {
             <span></span>
           </li>
           <li
+            className={this.getClassName('starred')}
             onClick={() => {
               toggleFilter('starred')
             }}
@@ -82,6 +110,7 @@ export class MailFolderList extends React.Component {
           </li>
 
           <li
+            className={this.getClassName('important')}
             onClick={() => {
               toggleFilter('important')
             }}
@@ -101,7 +130,7 @@ export class MailFolderList extends React.Component {
           </li>
 
           <li
-            className="mail-folder sent"
+            className={this.getClassName('sent')}
             onClick={() => {
               toggleFilter('sent')
             }}
@@ -110,7 +139,7 @@ export class MailFolderList extends React.Component {
             <span></span>
           </li>
           <li
-            className="mail-folder trash"
+            className={this.getClassName('trash')}
             onClick={() => {
               toggleFilter('trash')
             }}

@@ -1,4 +1,3 @@
-// import { MailTopNavbar } from '../cmps/mail-top-navbar.jsx'
 import { mailService } from '../services/mail.service.js'
 
 export class MailCompose extends React.Component {
@@ -30,13 +29,23 @@ export class MailCompose extends React.Component {
     this.props.onCompose()
   }
 
+  onGoBack = () => {
+    this.props.history.push('/mail')
+  }
+
   render() {
     const { sentBy, subject, body } = this.state
+    const { onGoBack } = this
     return (
       <section className="mail-compose">
+        <div className="header-compose">
+          <h1>Sent Mail</h1>
+          <button onClick={onGoBack}>X</button>
+        </div>
         <form onSubmit={this.onSentMail}>
           <label htmlFor="sentBy"></label>
           <input
+            ref={this.props.inputRef}
             type="text"
             id="sentBy"
             placeholder="sent By..."

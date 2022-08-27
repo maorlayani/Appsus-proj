@@ -1,23 +1,43 @@
-import { MailTopNavbar } from '../cmps/mail-top-navbar.jsx'
+import { mailService } from '../services/mail.service.js'
 
-export function MailDetails({ mail, onGoBack, onRemoveMail }) {
-  return (
-    <section className="mail-details">
-      <div className="header-mail-details">
-        <h1>
-          {mail.sentBy} <span>{mail.sentAt}</span>
-        </h1>
-        <h2>{mail.subject}</h2>
+export class MailDetails extends React.Component {
+  state = {
+    mail: null,
+  }
 
-        <MailTopNavbar />
+  componentDidMount() {
+    console.log('this.props:', this.props)
+    this.loadMail()
+  }
 
-        <button onClick={onGoBack}>Back</button>
-        <button onClick={(event) => onRemoveMail(event, mail.id)}>
-          Delete
-        </button>
-      </div>
+  loadMail = () => {
+    const { mailId } = this.props.match.params
+    mailService.getById(mailId).then((mail) => {
+      this.setState({ mail })
+    })
+  }
 
-      <p>{mail.body}</p>
-    </section>
-  )
+  onGoBack = () => {
+    this.props.history.push('/mail')
+  }
+
+  render() {
+    const { mail } = this.state
+    const { onGoBack } = this
+    if (!mail) return <div>Loading...</div>
+    return (
+      <section className="mail-details">
+        <div className="header-mail-details">
+          <h1>
+            {mail.sentBy} <span>{mail.sentAt}</span>
+          </h1>
+          <h2>{mail.subject}</h2>
+
+          <button onClick={onGoBack}>Back</button>
+        </div>
+
+        <p>{mail.body}</p>
+      </section>
+    )
+  }
 }

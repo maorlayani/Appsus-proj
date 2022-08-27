@@ -3,7 +3,14 @@ const { Link } = ReactRouterDOM
 // import { mailService } from '../services.js'
 import { MailPreview } from './mail-preview.jsx'
 
-export function MailList({ mails, onSelectMail, onToggleBtn, onRemoveMail }) {
+export function MailList({
+  mails,
+  onSelectMail,
+  onToggleBtn,
+  onRemoveMail,
+  onMoveTrashMail,
+  trash,
+}) {
   function getClassName(mail) {
     if (mail.isCheck) {
       return 'mail-preview check'
@@ -29,10 +36,10 @@ export function MailList({ mails, onSelectMail, onToggleBtn, onRemoveMail }) {
             </button>
             <button
               onClick={() => {
-                onToggleBtn(mail, 'isStarred')
+                onToggleBtn(mail, 'starred')
               }}
             >
-              {mail.isStarred ? (
+              {mail.starred ? (
                 <i
                   className="fa-solid fa-star"
                   style={{ color: 'rgb(234, 181, 7)' }}
@@ -43,10 +50,10 @@ export function MailList({ mails, onSelectMail, onToggleBtn, onRemoveMail }) {
             </button>
             <button
               onClick={() => {
-                onToggleBtn(mail, 'isImportant')
+                onToggleBtn(mail, 'important')
               }}
             >
-              {mail.isImportant ? (
+              {mail.important ? (
                 <i
                   className="fa-solid fa-bookmark"
                   style={{ color: 'rgb(234, 181, 7)' }}
@@ -56,7 +63,7 @@ export function MailList({ mails, onSelectMail, onToggleBtn, onRemoveMail }) {
               )}
             </button>
 
-            <Link to={'/mail/' + mail.id}>
+            <Link to={'/mail/details/' + mail.id}>
               <MailPreview mail={mail} onSelectMail={onSelectMail} />
             </Link>
 
@@ -64,7 +71,11 @@ export function MailList({ mails, onSelectMail, onToggleBtn, onRemoveMail }) {
               <Link
                 to={`/mail/trash/${mail.id}`}
                 onClick={() => {
-                  onRemoveMail(event, mail.id)
+                  if (trash) {
+                    onRemoveMail(event, mail.id)
+                  } else {
+                    onMoveTrashMail(event, mail.id)
+                  }
                 }}
               >
                 <i className="fa-regular fa-trash-can"></i>
