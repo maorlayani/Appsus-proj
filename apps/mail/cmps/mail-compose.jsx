@@ -31,6 +31,7 @@ export class MailCompose extends React.Component {
 
   onGoBack = () => {
     this.props.history.push('/mail')
+    this.props.onCompose()
   }
 
   render() {

@@ -20,7 +20,7 @@
 }
 
 /* mail-folder ${type} clicked */
-.mail-folder-list ul li.mail-folder.clicked {
+.mail-folder-list ul .active li {
   width: 12em;
   border-radius: 1em;
 
@@ -34,7 +34,7 @@
   border-radius: 1em;
 }
 
-.mail-folder-list ul li.mail-folder:hover {
+.mail-folder-list ul li:hover {
   width: 12em;
   border-radius: 1em;
   cursor: pointer;

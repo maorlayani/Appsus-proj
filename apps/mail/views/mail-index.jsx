@@ -174,7 +174,7 @@ export class MailIndex extends React.Component {
               this.props.history.push('/mail')
             }}
           >
-            mail
+            mail💌
           </div>
           <MailFilter
             onSetFilterBySearch={onSetFilterBySearch}
@@ -196,49 +196,12 @@ export class MailIndex extends React.Component {
           <section className="main-content-app">
             <Switch>
               <Route path="/mail/details/:mailId" component={MailDetails} />
-              <Route path="/mail/compose" component={MailCompose} />
-              <Route path="/mail" component={MailList} />
+              <Route path="/mail/:mailFilter" component={MailList} />
             </Switch>
+            {/* <Route path="/mail/compose" component={MailCompose} /> */}
+            {isCompose && <MailCompose />}
           </section>
         </Router>
-        {/* <Route path="/mail/details/:mailId"> 
-              <MailDetails />
-            </Route> */}
-
-        {/* <Route exact path="/mail">
-              <MailList
-                mails={getTypeMails()}
-                trash={trash}
-                onSelectMail={onSelectMail}
-                onToggleBtn={onToggleBtn}
-                onRemoveMail={onRemoveMail}
-                onMoveTrashMail={onMoveTrashMail}
-              />
-            </Route> */}
-
-        {/* {doRenderList && (
-              <MailList
-                mails={getTypeMails()}
-                trash={trash}
-                onSelectMail={onSelectMail}
-                onToggleBtn={onToggleBtn}
-                onRemoveMail={onRemoveMail}
-                onMoveTrashMail={onMoveTrashMail}
-              />
-            )} */}
-
-        {/* {selectedMail && (
-            <MailDetails
-              mail={selectedMail}
-              onGoBack={() => onSelectMail()}
-              onRemoveMail={onRemoveMail}
-            />
-          )} */}
-        {/* {isCompose && (
-              <MailCompose onCompose={onCompose} inputRef={inputRef} />
-            )} */}
-        {/* </section>
-        </Router> */}
       </section>
     )
   }

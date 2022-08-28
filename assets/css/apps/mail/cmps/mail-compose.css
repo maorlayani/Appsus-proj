@@ -4,7 +4,7 @@
   /* z-index: 10; */
   background-color: whitesmoke;
   width: 50%;
-  height: 40%;
+  height: 50%;
   right: 10px;
   bottom: 20px;
 
@@ -20,4 +20,14 @@
 .mail-compose label input {
   width: 100%;
   height: 30%;
+}
+
+.mail-compose .header-compose {
+  background-color: rgb(35, 34, 34);
+  color: antiquewhite;
+  font-size: 20px;
+}
+
+.mail-compose button {
+  background-color: gray;
 }

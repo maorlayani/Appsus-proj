@@ -6,9 +6,17 @@
 
 .mail-app header {
   background-color: whitesmoke;
+  display: flex;
   border: none;
 }
 
+.mail-app header .mail-logo {
+  margin-top: 10px;
+  margin-right: 200px;
+  margin-left: 50px;
+  font-size: 30px;
+  cursor: pointer;
+}
 .mail-app aside {
   /* background-color: aqua; */
   float: left;

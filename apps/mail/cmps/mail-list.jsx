@@ -28,11 +28,42 @@ export class MailList extends React.Component {
     // this.onSentMails()
     console.log('this.state.mails:', this.state.mails)
   }
+  // loadMail = () => {
+  //   const { mailId } = this.props.match.params
+  //   mailService.getById(mailId).then((mail) => {
+  //     this.setState({ mail })
+  //   })
+  // }
+  // componentDidUpdate() {
+  //   // this.loadMails()
+  // }
 
   loadMails = () => {
-    mailService
-      .query(this.state.filterBy)
-      .then((mails) => this.setState({ mails }))
+    console.log('this.props:', this.props)
+    const { mailFilter } = this.props.match.params
+    console.log(' mailFilter:', mailFilter)
+    if (mailFilter === 'important' || mailFilter === 'starred') {
+      const value = this.state.filterBy[mailFilter]
+      console.log('value:', value)
+      console.log('!value:', !value)
+      this.setState(
+        (prevState) => ({
+          filterBy: {
+            ...prevState.filterBy,
+            [mailFilter]: !value,
+          },
+        }),
+        () => {
+          mailService
+            .query(this.state.filterBy)
+            .then((mails) => this.setState({ mails }))
+        }
+      )
+    } else {
+      mailService
+        .query(this.state.filterBy)
+        .then((mails) => this.setState({ mails }))
+    }
   }
 
   getClassName = (mail) => {
@@ -42,12 +73,30 @@ export class MailList extends React.Component {
     return mail.isRead ? 'mail-preview ' : 'mail-preview unRead'
   }
 
-  getTypeMails = () => {
-    const { sent, trash } = this.state.filterBy
+  getTypeMails = (val) => {
+    console.log('mailFilter:', val)
     const { mails, sentMails, trashMails } = this.state
-    if (sent) return sentMails
-    if (trash) return trashMails
+    const mailFilter = `${val}`
+    console.log('mailFilter:', mailFilter)
+    if (mailFilter === 'sent') {
+      console.log('helooooo sent')
+      this.onSentMails().then((sentMails) => {
+        sentMails
+      })
+      return sentMails
+    }
+    if (mailFilter === 'trash') {
+      this.onTrashMails().then((trashMails) => {
+        trashMails
+      })
+      return trashMails
+    }
     return mails
+  }
+
+  onSentMails = () => {
+    console.log('hiiiiiiSenntttt')
+    mailService.getSentMails().then((sentMails) => this.setState({ sentMails }))
   }
 
   onToggleBtn = (mail, field) => {
@@ -96,8 +145,9 @@ export class MailList extends React.Component {
       onMoveTrashMail,
     } = this
     const { trash } = this.state.filterBy
-
-    const mails = getTypeMails()
+    const { mailFilter } = this.props.match.params
+    console.log(' mailFilter:', mailFilter)
+    const mails = getTypeMails(mailFilter)
     console.log('mails:', mails)
     if (!mails || mails.length === 0) return <div>Loading...</div>
     return (
