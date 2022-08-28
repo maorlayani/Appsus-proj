@@ -1,11 +1,9 @@
 import { NoteCompose } from "../cmps/note-compose.jsx";
-import { NoteFolderList } from "../cmps/note-folder-list.jsx";
-import { NoteFilter } from "../cmps/note-filter.jsx";
 import { NoteList } from "../cmps/note-list.jsx";
-
 import { noteService } from '../services/note.service.js'
 
 export class NoteIndex extends React.Component {
+
     state = {
         notes: null,
         pinnedNotes: [],
@@ -19,9 +17,6 @@ export class NoteIndex extends React.Component {
     loadNotes = () => {
         noteService.query()
             .then((notes) => {
-                // let { pinnedNotes, unPinnedNotes } = this.state
-                // pinnedNotes = notes.filter(note => (note.isPinned))
-                // unPinnedNotes = notes.filter(note => (!note.isPinned))
                 this.setState({ notes }, this.filterNotesByPinned)
             })
     }
@@ -34,11 +29,8 @@ export class NoteIndex extends React.Component {
     }
 
     onUpdetaNote = (title, txt, note) => {
-        // if (!title && !txt) return
         if (note.info.todos) return
         let { notes } = this.state
-        // console.log('title from INDEX', title)
-        // console.log('txt from INDEX', txt)
         noteService.updateNote(title, txt, note)
             .then((updatedNote) => {
                 notes = notes.map(note => note.id === updatedNote.id ? updatedNote : note)
@@ -103,9 +95,6 @@ export class NoteIndex extends React.Component {
                     onSortNotesByPinned={onSortNotesByPinned}
                     pinnedNotes={pinnedNotes}
                     unPinnedNotes={unPinnedNotes} />
-                {/* <NoteFilter />
-                <NoteFolderList />
-                */}
             </div>
         )
     }

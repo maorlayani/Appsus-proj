@@ -1,20 +1,35 @@
 .note-todos {
-    padding: 10px;
+    margin: 0;
+    letter-spacing: .01428571em;
+    font-family: Roboto-Regular, Arial, sans-serif;
+    font-size: .875rem;
+    line-height: 1.25rem;
+    color: #202124;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    color: #5f6368;
+    margin-bottom: 55px;
 }
 
 .note-todos h4 {
     text-transform: capitalize;
+    letter-spacing: .00625em;
+    font-family: Roboto-Medium, Arial, sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5rem;
+    padding: 12px 16px 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    color: #202124;
 }
 
 .is-done {
     text-decoration: line-through;
 }
 
-/* .note-todos button {
-    float: right;
-} */
 .todo-label {
-    padding-left: 5px;
+    padding: 4px 16px 0px 10px;
 }
 
 .btn-delete-todo {
@@ -23,7 +38,6 @@
     background-color: transparent;
     background-size: 18px 18px;
     margin: 0;
-    /* opacity: 0.54; */
     opacity: 0;
     background-repeat: no-repeat;
     border-radius: 50%;
@@ -45,42 +59,35 @@
 }
 
 .note-todo-container {
-    /* padding: 10px; */
     border-bottom: 1px solid transparent;
     border-top: 1px solid transparent;
+    padding-left: 16px;
 }
-
-/* .note-todo-container.display-Details:hover {
-
-    border-bottom: 1px solid rgba(95, 99, 104, 0.157);
-    border-top: 1px solid rgba(95, 99, 104, 0.157);
-} */
-
-/* .note-todo-container:focus>.todo-txt {
-
-    border-bottom: 1px solid rgba(95, 99, 104, 0.157);
-    border-top: 1px solid rgba(95, 99, 104, 0.157);
-} */
 
 .note-todo-container [name="todo-checkbox"] {
     display: inline;
 }
 
-.todo-txt {
-    width: 100%;
-    /* padding: 12px 16px; */
-    border: none;
-    display: inline;
-    /* text-decoration: line-through; */
-    border-bottom: 1px solid rgba(95, 99, 104, 0);
-    border-top: 1px solid rgba(95, 99, 104, 0);
-    padding: 13px;
+.note-todo-container [name="todo-checkbox"]:hover {
+    opacity: 1;
+    cursor: pointer;
 }
 
-/* .todo-txt::after {
-    content: '';
-    width: 150%;
-} */
+.todo-txt {
+    width: 100%;
+    border: none;
+    display: inline;
+    border-bottom: 1px solid rgba(95, 99, 104, 0);
+    border-top: 1px solid rgba(95, 99, 104, 0);
+    padding: 4px 16px 6px 16px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    color: #5f6368;
+    font-family: Roboto-Regular, Arial, sans-serif;
+    letter-spacing: .00625em;
+    line-height: 1.5rem;
+    font-size: 1rem;
+}
 
 .todo-txt:hover+.btn-delete-todo {
     opacity: 0.54;
@@ -92,7 +99,6 @@
 
 .todo-txt.checked {
     width: 100%;
-    /* padding: 12px 16px; */
     border: none;
     display: inline;
     text-decoration: line-through;
@@ -110,8 +116,16 @@
 
 .note-todos [name="note-todo-title"] {
     width: 100%;
-    padding: 12px 16px;
     border: none;
+    padding: 16px 15px 12px;
+    border: none;
+    font-family: Roboto-Regular, Arial, sans-serif;
+    font-size: 1.375rem;
+    letter-spacing: 0;
+    line-height: 1.75rem;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    color: #202124;
 }
 
 .note-todos [name="note-todo-title"]:focus {

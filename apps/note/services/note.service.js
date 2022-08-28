@@ -15,15 +15,15 @@ function _demoData() {
     const notes = [
         {
             id: utilService.makeId(),
-            type: "note-txt",
-            isPinned: true,
+            type: "note-video",
+            isPinned: false,
             info: {
-                title: '',
-                txt: utilService.makeLorem(35)
+                url: "https://www.youtube.com/embed/qALEkPoY-Hg",
+                title: ""
             },
             style: {
                 backgroundColor:
-                    "#e6c9a8"
+                    "#fff"
             }
         },
         {
@@ -32,7 +32,7 @@ function _demoData() {
             isPinned: true,
             info: {
                 title: '',
-                txt: utilService.makeLorem(50)
+                txt: 'Home WIFI Password: pass123456789'
             },
             style: {
                 backgroundColor:
@@ -45,7 +45,7 @@ function _demoData() {
             isPinned: false,
             info: {
                 title: '',
-                txt: utilService.makeLorem(20)
+                txt: 'React (also known as React.js or ReactJS) is a free and open-source front-end JavaScript library[3] for building user interfaces based on UI components. It is maintained by Meta (formerly Facebook) and a community of individual developers and companies.'
             },
             style: {
                 backgroundColor:
@@ -58,7 +58,7 @@ function _demoData() {
             isPinned: false,
             info: {
                 title: '',
-                txt: utilService.makeLorem(15)
+                txt: `Don't forget to renew your driving license before the end of the month`
             },
             style: {
                 backgroundColor:
@@ -70,8 +70,8 @@ function _demoData() {
             type: "note-img",
             isPinned: false,
             info: {
-                url: "https://picsum.photos/300/200",
-                title: "Bobi and Me"
+                url: "https://i.picsum.photos/id/1001/5616/3744.jpg?hmac=38lkvX7tHXmlNbI0HzZbtkJ6_wpWyqvkX4Ty6vYElZE",
+                title: "Saturday at the beach"
             },
             style: {
                 backgroundColor:
@@ -83,12 +83,12 @@ function _demoData() {
             type: "note-txt",
             isPinned: true,
             info: {
-                title: '',
-                txt: "Fullstack Me Baby!"
+                title: 'Wedding anniversary 21/9',
+                txt: ''
             },
             style: {
                 backgroundColor:
-                    "#fff"
+                    "#fdcfe8"
             }
         },
         {
@@ -97,7 +97,7 @@ function _demoData() {
             isPinned: false,
             info: {
                 url: "https://www.youtube.com/embed/8aGhZQkoFbQ",
-                title: "EVENT LOOP"
+                title: "Event loop video explanation"
             },
             style: {
                 backgroundColor:
@@ -106,11 +106,15 @@ function _demoData() {
         },
         {
             id: utilService.makeId(),
-            type: "note-txt",
-            isPinned: false,
+            type: "note-todo",
+            isPinned: true,
             info: {
-                title: '',
-                txt: utilService.makeLorem(70)
+                label: "TV shows to watch",
+                todos: [
+                    { txt: "House of the Dragon", doneAt: null, id: utilService.makeId() },
+                    { txt: "Ted Lasso", doneAt: null, id: utilService.makeId() },
+                    { txt: "Better Call Saul", doneAt: null, id: utilService.makeId() },
+                ]
             },
             style: {
                 backgroundColor:
@@ -123,7 +127,7 @@ function _demoData() {
             isPinned: false,
             info: {
                 title: '',
-                txt: utilService.makeLorem(10)
+                txt: 'JavaScript has a runtime model based on an event loop, which is responsible for executing the code, collecting and processing events, and executing queued sub-tasks. This model is quite different from models in other languages like C and Java.'
             },
             style: {
                 backgroundColor:
@@ -135,27 +139,26 @@ function _demoData() {
             type: "note-img",
             isPinned: false,
             info: {
-                url: "https://picsum.photos/300/300",
-                title: "Bobi and Me"
+                url: "https://i.picsum.photos/id/1020/4288/2848.jpg?hmac=Jo3ofatg0fee3HGOliAIIkcg4KGXC8UOTO1dm5qIIPc",
+                title: "Don't mess with mama bear"
             },
             style: {
                 backgroundColor:
-                    "#fff"
+                    "#e6c9a8"
             }
         },
         {
             id: utilService.makeId(),
             type: "note-todo",
-            isPinned: false,
+            isPinned: true,
             info: {
-                label: "Get my stuff together",
+                label: "Prepare for vacation",
                 todos: [
-                    { txt: "Driving liscence", doneAt: null, id: utilService.makeId() },
-                    { txt: "Coding power", doneAt: null, id: utilService.makeId() },
-                    { txt: "Grocery", doneAt: null, id: utilService.makeId() },
-                    { txt: "Car test", doneAt: null, id: utilService.makeId() },
-                    { txt: "Pay bills", doneAt: null, id: utilService.makeId() },
-                    { txt: "Draw cash", doneAt: null, id: utilService.makeId() }
+                    { txt: "Check in to the flight", doneAt: null, id: utilService.makeId() },
+                    { txt: "Pack snacks", doneAt: null, id: utilService.makeId() },
+                    { txt: "Take out the trash", doneAt: null, id: utilService.makeId() },
+                    { txt: "Set an away message in the email", doneAt: new Date(), id: utilService.makeId() },
+                    { txt: "Put bags near the door!", doneAt: null, id: utilService.makeId() }
                 ]
             },
             style: {
@@ -183,7 +186,6 @@ function addNote(noteTitle, noteTxt, noteType) {
     else if (noteType === 'img') newNote = createNoteImg(noteTitle, noteTxt, noteType)
     else if (noteType === 'video') newNote = createNoteVideo(noteTitle, noteTxt, noteType)
     else if (noteType === 'todo') newNote = createNoteTodo(noteTitle, noteTxt, noteType)
-    // console.log('noteTODO', newNote)
     let notes = storageService.loadFromStorage(STORAGE_KEY)
     notes.unshift(newNote)
     storageService.saveToStorage(STORAGE_KEY, notes)
@@ -242,11 +244,7 @@ function createNoteVideo(title, txt, noteType) {
 }
 
 function createNoteTodo(label, txt, noteType) {
-
     let todos = txt.split(',')
-    // console.log('before splice', todos)
-    // const label = todos.splice(0, 1)
-    // console.log('after splice', todos)
     return {
         id: utilService.makeId(),
         type: 'note-' + noteType,
@@ -276,14 +274,12 @@ function updateNote(title, txt, note) {
     if (note.type === 'note-txt') updatedNote = updateNoteTxt(title, txt, note)
     else if (note.type === 'note-img') updatedNote = updateNoteImg(title, note)
     else if (note.type === 'note-video') updatedNote = updateNoteVideo(title, note)
-
     return Promise.resolve(updatedNote)
 }
 
 function updateNoteTxt(title, txt, noteToUpdate) {
     noteToUpdate.info.txt = txt
     noteToUpdate.info.title = title
-    // console.log('from first func on service', title)
     let notes = storageService.loadFromStorage(STORAGE_KEY)
     notes = notes.map(note => note.id === noteToUpdate.id ? noteToUpdate : note)
     storageService.saveToStorage(STORAGE_KEY, notes)
@@ -291,7 +287,6 @@ function updateNoteTxt(title, txt, noteToUpdate) {
 }
 
 function updateNoteImg(val, noteToUpdate) {
-    // console.log(val, noteToUpdate)
     noteToUpdate.info.title = val
     let notes = storageService.loadFromStorage(STORAGE_KEY)
     notes = notes.map(note => note.id === noteToUpdate.id ? noteToUpdate : note)
@@ -300,7 +295,6 @@ function updateNoteImg(val, noteToUpdate) {
 }
 
 function updateNoteVideo(val, noteToUpdate) {
-    // console.log(val, noteToUpdate)
     noteToUpdate.info.title = val
     let notes = storageService.loadFromStorage(STORAGE_KEY)
     notes = notes.map(note => note.id === noteToUpdate.id ? noteToUpdate : note)

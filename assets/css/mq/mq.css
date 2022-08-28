@@ -1,8 +1,51 @@
-@media (max-width:600px) {
+@media (max-width:520px) {
 
     .note-main-layout>*:not(.full) {
-        max-width: 250px;
+        max-width: 350px;
         margin: auto;
+    }
+
+    .note-preview {
+        left: 50px;
+    }
+
+    .note-list {
+        margin-top: -60px !important;
+    }
+
+    .notes-list-title {
+        position: relative;
+        left: 50px;
+    }
+
+    .note-img img {
+        height: 200px;
+        text-align: center;
+    }
+
+    .note-preview.focus {
+        max-width: 300px;
+    }
+
+    .note-compose {
+        position: relative;
+        left: 50px;
+    }
+
+    .note-list {
+        position: relative;
+        top: 100px;
+    }
+
+    .app-header .header-logo {
+        left: 10px !important;
+        width: 100%;
+    }
+
+    .drop-down {
+        position: relative;
+        left: 150px;
+        margin-left: 10px !important;
     }
 }
 
@@ -10,24 +53,41 @@
 @media (min-width: 600px) {
 
     .note-main-layout>*:not(.full) {
-        max-width: 500px;
+        max-width: 520px;
         margin: auto;
     }
 }
 
 /* MEDIUM */
 
-@media (min-width:820px) {
+@media (min-width: 820px) {
 
     .note-main-layout>*:not(.full) {
         max-width: 750px;
         margin: auto;
     }
+
+    .note-compose {
+        width: 570px !important;
+    }
+
+    .note-compose-container form {
+        width: 350px !important;
+    }
+
+    [name="noteTitle"],
+    [name="noteTxt"] {
+        width: 350px !important;
+    }
+
+    .btn-compose-add-note {
+        left: 440px !important;
+    }
 }
 
 /* LARGE */
 
-@media (min-width:1150px) {
+@media (min-width: 1150px) {
 
     .note-main-layout>*:not(.full) {
         max-width: 1000px;

@@ -17,7 +17,6 @@ export class NotePreview extends React.Component {
     }
 
     setOnDetailsDisplay = (isOn) => {
-        // console.log(isOn)
         this.setState(({ isOnDetailsDisplay: isOn }))
     }
 
@@ -27,7 +26,7 @@ export class NotePreview extends React.Component {
         const { handleMouseOver, handleMouseOut, setOnDetailsDisplay } = this
         return <section >
             <div
-                className={'note-preview'}
+                className="note-preview"
                 onMouseOver={handleMouseOver}
                 onMouseOut={handleMouseOut}
                 onClick={() => setOnDetailsDisplay(true)}
@@ -50,7 +49,6 @@ export class NotePreview extends React.Component {
                 onUpdateTodoNote={onUpdateTodoNote}
                 onCopyNote={onCopyNote}
                 onSortNotesByPinned={onSortNotesByPinned}
-
             />}
         </section >
     }
