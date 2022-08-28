@@ -46,7 +46,7 @@ class _AppHeader extends React.Component {
                 <div className="about"></div>
                 <div className="about-title">About</div>
               </div>
-            </NavLink> */}
+            </NavLink>x */}
           </div>
         </nav>
 
